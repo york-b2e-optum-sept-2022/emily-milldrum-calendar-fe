@@ -2,11 +2,10 @@
 <div>
   <app-login *ngIf ="!isRegistering && !isLoggedIn"></app-login>
   <app-register *ngIf ="isRegistering"></app-register>
-
 </div>
 
 
-<div>
+<div *ngIf ="!isRegistering && isLoggedIn">
   <button (click)="logoutClick()">Logout</button>
 </div>
 
