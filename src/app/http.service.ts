@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {IAccount} from "./interfaces/IAccount";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HttpService {
+
+  constructor(private httpClient: HttpClient) { }
+
+  findAccount(email: string){
+    console.log("hs received " + email);
+    console.log('http://localhost:3000/accounts?email=' + email);
+    return this.httpClient.get('http://localhost:3000/accounts?email=' + email) as Observable<IAccount[]>
+  }
+
+  register(regForm: IAccount){
+    return this.httpClient.post(
+      'http://localhost:3000/accounts', regForm
+    ) as Observable<IAccount>;
+  }
+
+  //TODO
+  // getProductList(){
+  //   return this.httpClient.get('http://localhost:3000/products'
+  //   )as Observable<IProduct[]>;
+  // }
+}

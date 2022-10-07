@@ -1,0 +1,25 @@
+{
+  "accounts": [
+    {
+      "id": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
+      "email": "test@test.com",
+      "password": "test",
+      "firstName": "Em",
+      "lastName": "M"
+    },
+    {
+      "id": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+      "email": "test2@test.com",
+      "password": "test",
+      "firstName": "Z",
+      "lastName": "M"
+    },
+    {
+      "id": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+      "email": "em@.com",
+      "password": "Fart",
+      "firstName": "E",
+      "lastName": "M"
+    }
+  ]
+}

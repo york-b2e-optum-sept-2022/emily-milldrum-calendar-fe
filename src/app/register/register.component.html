@@ -1,0 +1,30 @@
+<div class="form-container">
+  <form #regForm="ngForm" (ngSubmit)="onRegisterClick(regForm)">
+    <h3>Register</h3>
+    <div class="form-group">
+      <label for="fNameInput">First Name</label>
+      <input ngModel name="firstName" class="form-control" id="fNameInput" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="lNameInput">Last Name</label>
+      <input ngModel name="lastName" class="form-control" id="lNameInput" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="emailInput">E-mail address (Username)</label>
+      <input ngModel name="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="passwordInput">Password</label>
+      <input ngModel name="password" class="form-control" id="passwordInput" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-outline-success">Register</button>
+    <button class="btn btn-outline-success"  (click)="cancelRegClick()">Cancel</button>
+
+
+
+
+  </form>
+  <div class="error-message">{{errorMessage}}</div>
+
+</div>

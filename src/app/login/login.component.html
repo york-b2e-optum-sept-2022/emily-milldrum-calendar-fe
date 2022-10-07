@@ -1,0 +1,9 @@
+<div class="form-container">
+
+  <div><input class="form-control me-2" [(ngModel)]="username" placeholder="username"></div>
+  <div><input class="form-control me-2" [(ngModel)]="password" placeholder="password"></div>
+  <button class="btn btn-outline-success" (click)="loginClick()">Login</button>
+  <button class="btn btn-outline-success" (click)="registerClick()">Register</button>
+  <div class="error-message">{{errorMessage}}</div>
+</div>
+
