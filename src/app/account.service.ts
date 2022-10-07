@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 //TODO import {HttpService} from "./http.service";
-import {BehaviorSubject, first} from "rxjs";
+import {BehaviorSubject, first, Subject} from "rxjs";
 import {IAccount} from "./interfaces/IAccount";
 import { v4 as uuidv4 } from 'uuid';
 import {HttpService} from "./http.service";
@@ -11,15 +11,18 @@ import {HttpService} from "./http.service";
 export class AccountService {
 //TODO change to null for production & value for testing
   $account = new BehaviorSubject<IAccount | null>(
-    // {
-    //   "id": "default",
-    //   "email": "default",
-    //   "password": "default",
-    //   "firstName": "default",
-    //   "lastName": "default"
-    // }
-    null
+    {
+      "id": "default",
+      "email": "default",
+      "password": "default",
+      "firstName": "default",
+      "lastName": "default"
+    }
+    // null
   )
+
+  $accountList = new Subject<IAccount>();
+  accountList: IAccount[] = [];
 
   $isRegistering = new BehaviorSubject<boolean>(false);
   $registrationError = new BehaviorSubject<string | null>(null);
@@ -40,6 +43,26 @@ export class AccountService {
   constructor(
     private httpService: HttpService
   ) {
+    this.httpService.getAccounts().subscribe({
+      next: (data) => {
+
+        const testArr = Object.values(data).map(y => y.valueOf());
+        console.log(testArr);
+        //let result = names.map(a => a.testing);
+        for (let i = 0; i < testArr.length; i++){
+          console.log(testArr[i]);
+          this.accountList.push(testArr[i]);
+        }
+
+        // @ts-ignore
+        this.$accountList.next(this.accountList);
+
+        console.log('testArr to accountlist ' + this.$accountList);
+      },
+      error: (err) => {
+        console.error('db' + err);
+      }
+    })
 
 
   }

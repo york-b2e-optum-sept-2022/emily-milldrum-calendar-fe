@@ -6,6 +6,8 @@
 
 
 <div *ngIf ="!isRegistering && isLoggedIn">
+  <app-datepicker></app-datepicker>
+  <app-event-list></app-event-list>
   <button (click)="logoutClick()">Logout</button>
 </div>
 

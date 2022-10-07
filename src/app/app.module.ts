@@ -7,12 +7,18 @@ import { RegisterComponent } from './register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { InviteInputComponent } from './invite-input/invite-input.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavBarComponent,
+    InviteInputComponent,
+    EventListComponent
   ],
     imports: [
         BrowserModule,

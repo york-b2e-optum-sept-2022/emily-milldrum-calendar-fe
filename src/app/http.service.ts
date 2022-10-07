@@ -22,6 +22,11 @@ export class HttpService {
     ) as Observable<IAccount>;
   }
 
+  getAccounts()  {
+    return this.httpClient.get('http://localhost:3000/accounts')
+  }
+
+
   //TODO
   // getProductList(){
   //   return this.httpClient.get('http://localhost:3000/products'
