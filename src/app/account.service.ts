@@ -14,14 +14,16 @@ export class AccountService {
       "id": "default",
       "email": "default",
       "password": "default",
-      "firstName": "default",
-      "lastName": "default"
+      "firstName": "Emily",
+      "lastName": "Testing"
     }
     // null
+
   )
 
-  $accountList = new Subject<IAccount>();
+  $accountList = new BehaviorSubject<IAccount[]>([]);
   accountList: IAccount[] = [];
+  account: IAccount[]= this.accountList;
 
   $isRegistering = new BehaviorSubject<boolean>(false);
   $registrationError = new BehaviorSubject<string | null>(null);

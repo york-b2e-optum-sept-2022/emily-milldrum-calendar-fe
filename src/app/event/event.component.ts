@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IEvent} from "../interfaces/IEvent";
+import {EventService} from "../event.service";
 
 @Component({
   selector: 'app-event',
@@ -9,7 +10,7 @@ import {IEvent} from "../interfaces/IEvent";
 export class EventComponent implements OnInit {
 
   @Input() event!: IEvent;
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
   }
@@ -20,8 +21,8 @@ export class EventComponent implements OnInit {
   }
 
   onDeleteClick(event: IEvent){
-    //TODO
     console.log('delete click works')
+    this.eventService.deleteEvent(this.event);
   }
 
 

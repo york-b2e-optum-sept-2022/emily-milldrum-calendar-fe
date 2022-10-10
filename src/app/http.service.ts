@@ -32,10 +32,24 @@ export class HttpService {
     )as Observable<IEvent[]>;
   }
 
+  deleteEvent(id: string) {
+    console.log('delete event http s' + id);
 
-  //TODO
-  // getProductList(){
-  //   return this.httpClient.get('http://localhost:3000/products'
-  //   )as Observable<IProduct[]>;
-  // }
+    return this.httpClient.delete<any>('http://localhost:3000/events/' + id
+    )//as Observable<string>;
+    console.log('http://localhost:3000/events/' + id);
+  }
+
+  findEvent(eventDate: any){
+    console.log('find event') //TODO
+    return
+  }
+
+  createEvent(event: IEvent){
+    console.log('create event') //TODO
+    return this.httpClient.post(
+      'http://localhost:3000/event', event
+    ) as Observable<IEvent>;
+  }
+
 }

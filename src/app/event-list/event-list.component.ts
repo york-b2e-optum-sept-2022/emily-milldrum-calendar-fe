@@ -15,8 +15,11 @@ export class EventListComponent implements OnInit {
 
   constructor(private eventService: EventService) {
     this.eventService.$eventList.pipe(takeUntil(this.onDestroy)).subscribe(
-      eventList => this.eventList = eventList
+      eventList => {
+        return this.eventList = eventList;
+      }
     );
+    console.log('event list:' + this.eventList);
     //TODO Error message
   }
 

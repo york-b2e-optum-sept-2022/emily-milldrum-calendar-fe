@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InviteInputComponent } from './invite-input.component';
+import { EventInputComponent } from './event-input.component';
 
 describe('DatepickerComponent', () => {
-  let component: InviteInputComponent;
-  let fixture: ComponentFixture<InviteInputComponent>;
+  let component: EventInputComponent;
+  let fixture: ComponentFixture<EventInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InviteInputComponent ]
+      declarations: [ EventInputComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InviteInputComponent);
+    fixture = TestBed.createComponent(EventInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

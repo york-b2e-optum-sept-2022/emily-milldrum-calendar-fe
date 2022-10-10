@@ -1,0 +1,48 @@
+<h4>Create Event</h4>
+
+<form #eventForm="ngForm" (ngSubmit)="createEvent(eventForm)">
+  <div class="form-group">
+    <label for="eventNameInput">Event Name</label>
+    <input ngModel name="eventName" class="form-control" id="eventNameInput" placeholder="Enter Event Name">
+  </div>
+
+
+
+
+
+<ngb-datepicker ngModel name="date" [(ngModel)]="dateSelect" [minDate]="{year: 1, month: 1, day: 1}"
+                [maxDate]="{year: 9999, month: 12, day: 31}"
+
+
+
+            (dateSelect)="onDateSelect($event)"
+></ngb-datepicker>
+
+  {{ dateSelect | json }}
+</form>
+
+<div class="row">
+<div class="col">
+<div ngbDropdown class="d-inline-block">
+  <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1"
+       >
+    <button ngbDropdownItem *ngFor="let account of accountList">{{account.firstName}} {{account.lastName}}</button>
+      </div>
+    </div>
+    <div *ngFor="let account of accountList">
+      <input ngModel name="invites" type="checkbox" (change)="eventCheck($event)">
+<!--      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">-->
+
+      {{account.firstName}} {{account.lastName}}
+
+    </div>
+
+    <button (click)="createEvent(eventForm)"  type="submit">Create Event</button>
+
+    {{errorMessage}}
+
+  </div>
+
+
+</div>

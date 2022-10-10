@@ -8,9 +8,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { InviteInputComponent } from './invite-input/invite-input.component';
+import { EventInputComponent } from './event-input/event-input.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventComponent } from './event/event.component';
+import { DateSearchComponent } from './date-search/date-search.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,10 @@ import { EventComponent } from './event/event.component';
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-    InviteInputComponent,
+    EventInputComponent,
     EventListComponent,
-    EventComponent
+    EventComponent,
+    DateSearchComponent
   ],
     imports: [
         BrowserModule,

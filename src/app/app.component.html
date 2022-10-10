@@ -7,8 +7,19 @@
 
 <div *ngIf ="!isRegistering && isLoggedIn">
   <app-nav-bar></app-nav-bar>
-  <app-datepicker></app-datepicker>
-  <app-event-list></app-event-list>
+
+<table style="width:100%">
+  <tr>
+    <th>  <app-event-list></app-event-list> </th>
+    <th>  <app-event-input></app-event-input> </th>
+  </tr>
+</table>
+
+
+
+
+
+
   <button (click)="logoutClick()">Logout</button>
 </div>
 
