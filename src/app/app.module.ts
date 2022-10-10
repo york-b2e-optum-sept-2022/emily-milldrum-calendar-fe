@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { InviteInputComponent } from './invite-input/invite-input.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EventListComponent } from './event-list/event-list.component';
     RegisterComponent,
     NavBarComponent,
     InviteInputComponent,
-    EventListComponent
+    EventListComponent,
+    EventComponent
   ],
     imports: [
         BrowserModule,

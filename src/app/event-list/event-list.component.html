@@ -4,26 +4,25 @@
       <th scope="col">Date</th>
       <th scope="col">Event Name</th>
       <th scope="col">Invited</th>
-      <th scope="col"> (Editting tools if right account?)</th>
+      <th scope="col"> (Editting tools // NGIF)</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-    </tbody>
+
+
+
+
   </table>
+<app-event *ngFor="let event of eventList" [event]="event" (click)="openEvent()"></app-event>
+
+
+<div class="m-3">
+
+  <!--    <input *ngIf="!item.done" type="checkbox" (change)="eventCheck($event)">-->
+  <!--    <input *ngIf="item.done" type="checkbox" checked (change)="eventCheck($event)">-->
+
+
+
+</div>
+
+<button (click)="refresh()">refresh test</button>
+

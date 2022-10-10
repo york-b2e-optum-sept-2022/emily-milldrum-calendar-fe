@@ -21,5 +21,38 @@
       "firstName": "E",
       "lastName": "M"
     }
+  ],
+
+  "events": [
+    {
+      "eventID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d222",
+      "creatorID": "test@test.com",
+      "eventDate": "9/10/22",
+      "eventName": "September Event",
+      "invited": [
+        "Em",
+        "Lee"
+      ]
+    },
+    {
+      "eventID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d666",
+      "creatorID": "test2@test2.com",
+      "eventDate": "10/10/22",
+      "eventName": "October Event",
+      "invited": [
+        "Lee"
+      ]
+    },
+    {
+      "eventID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d111",
+      "creatorID": "test@test.com",
+      "eventDate": "12/10/22",
+      "eventName": "December Event",
+      "invited": [
+        "Em",
+        "Lee",
+        "Kevin"
+      ]
+    }
   ]
 }
