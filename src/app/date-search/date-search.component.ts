@@ -6,7 +6,6 @@
 // })
 import {Component} from '@angular/core';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import {from} from "rxjs";
 import {EventService} from "../event.service";
 
 @Component({
@@ -21,7 +20,7 @@ export class DateSearchComponent {
   toDate: NgbDate | null;
 
   convertToDate!: Date;
-  convertFromDate: Date | null = null;
+  convertFromDate!: Date;
 
 
   constructor(private calendar: NgbCalendar,
@@ -60,13 +59,12 @@ export class DateSearchComponent {
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
     const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     console.log(parsed);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
   goButton(){
 
-      // @ts-ignore
     this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
   }
 }

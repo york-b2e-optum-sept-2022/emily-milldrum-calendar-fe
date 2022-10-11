@@ -13,18 +13,25 @@ export class EventService {
   curEventList: IEvent[] =[];
   $eventList = new BehaviorSubject<IEvent[]>([]);
   $event = new BehaviorSubject<IEvent | null>(null);
-
+  $selectedEvent = new BehaviorSubject<IEvent | null>(null);
 
   $eventError = new BehaviorSubject<string | null>(null);
   private readonly EVENT_INVALID_EVENT_NAME = "You must provide a valid event name";
   private readonly EVENT_HTTP_ERROR = "There was an error with the HTTP server";
+  private account: IAccount | null = null;
+  private accountID: string = "";
 
-  constructor(private httpService: HttpService, private accountService: AccountService) {
+  constructor(private httpService: HttpService,
+              private accountService: AccountService) {
     this.httpService.getEvents().pipe(first()).subscribe({
       next: eventList => {
         this.curEventList = eventList;
         this.$eventList.next(eventList)
       }
+    })
+
+    this.accountService.$account.subscribe(account => {
+      this.account = account
     })
   }
 
@@ -59,17 +66,22 @@ export class EventService {
       this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
     }
 
+    // @ts-ignore
+    if (this.account.id != null){
+      //TODO Fix bs null
+      // this.accountID = this.account?.id;
+    }
    //TODO Validation
-
     const event: IEvent = {
           id: uuidv4(),
-          creatorID: 'test',
+          creatorID: this.accountID,
           eventDate: dateConvert,
           eventName: eventForm.eventName,
           invited: {
             id: eventList}
 
         }
+
     console.log(eventForm.eventDate)
     this.httpService.createEvent(event).pipe(first()).subscribe({
       next: (event) => {
@@ -84,7 +96,7 @@ export class EventService {
     })
       }
 
-      dateSearch(convertFromDate: Date, convertToDate: Date){
+  dateSearch(convertFromDate: Date | null, convertToDate: Date){
         console.log('e s datesearch' + convertFromDate + " " + convertToDate)
         // @ts-ignore
         // this.$eventList.next(
@@ -94,6 +106,16 @@ export class EventService {
         //   &&
         //       new Date(m.eventDate) <= new Date(convertToDate)
         // ));
+  }
+
+  openEvent(event: IEvent) {
+    console.log("e s open event");
+    console.log(event)
+    this.$selectedEvent.next(event);
+
+  }
+  closeEvent(){
+    this.$selectedEvent.next(null);
   }
 
 }

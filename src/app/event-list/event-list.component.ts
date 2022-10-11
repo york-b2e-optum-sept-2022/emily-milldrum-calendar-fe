@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IEvent} from "../interfaces/IEvent";
 import {EventService} from "../event.service";
 import {Subject, takeUntil} from "rxjs";
@@ -12,6 +12,7 @@ export class EventListComponent implements OnInit {
 
   eventList: IEvent[] = [];
   onDestroy = new Subject();
+  @Input() event!: IEvent;
 
   constructor(private eventService: EventService) {
     this.eventService.$eventList.pipe(takeUntil(this.onDestroy)).subscribe(
@@ -37,7 +38,9 @@ export class EventListComponent implements OnInit {
   }
 
 
-  openEvent() {
-    console.log('open event')
+  openEvent(event: IEvent) {
+    console.log('open event works')
+    console.log(event)
+    this.eventService.openEvent(event)
   }
 }

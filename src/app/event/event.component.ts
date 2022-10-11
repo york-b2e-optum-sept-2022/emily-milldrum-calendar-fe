@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IEvent} from "../interfaces/IEvent";
 import {EventService} from "../event.service";
-import {Subject, takeUntil} from "rxjs";
+import {Subject} from "rxjs";
+import {AccountService} from "../account.service";
+import {IAccount} from "../interfaces/IAccount";
 
 @Component({
   selector: 'app-event',
@@ -10,21 +12,24 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class EventComponent implements OnInit {
 
-  events: IEvent | null = null;
+
 
   @Input() event!: IEvent;
+  $selectedEvent!: IEvent;
 
+  account: IAccount | null = null;
   onDestroy = new Subject();
-  private dateCovert: string | undefined;
 
-  constructor(private eventService: EventService) {
-    this.eventService.$event.pipe(takeUntil(this.onDestroy))
-      .subscribe(
-        (event) => {
-          this.events = event;
-        }
-      )
+  constructor(private eventService: EventService,
+              private accountService: AccountService) {
+
+    this.accountService.$account.subscribe(account => {
+     this.account = account
+   })
+
+    //TODO unsub
   }
+
 
   ngOnInit(): void {
   }
@@ -42,6 +47,11 @@ export class EventComponent implements OnInit {
   ngOnDestroy(): void {
     this.onDestroy.next(null);
     this.onDestroy.complete();
+  }
+
+  closeEvent(){
+    console.log('close clicked')
+    this.eventService.closeEvent();
   }
 
 

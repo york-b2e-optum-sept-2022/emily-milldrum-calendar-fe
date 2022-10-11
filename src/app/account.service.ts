@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, first, Subject} from "rxjs";
+import {BehaviorSubject, first} from "rxjs";
 import {IAccount} from "./interfaces/IAccount";
 import { v4 as uuidv4 } from 'uuid';
 import {HttpService} from "./http.service";
@@ -11,7 +11,7 @@ export class AccountService {
 //TODO change to null for production & value for testing
   $account = new BehaviorSubject<IAccount | null>(
     {
-      "id": "default",
+      "id": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "email": "default",
       "password": "default",
       "firstName": "Emily",
@@ -24,7 +24,6 @@ export class AccountService {
   $accountList = new BehaviorSubject<IAccount[]>([]);
   accountList: IAccount[] = [];
   account: IAccount[]= this.accountList;
-
   $isRegistering = new BehaviorSubject<boolean>(false);
   $registrationError = new BehaviorSubject<string | null>(null);
   $loginError = new BehaviorSubject<string | null>(null);
@@ -142,6 +141,13 @@ export class AccountService {
       },
     })
     this.$isRegistering.next(false);
+  }
+
+  getAccountID(){
+
+
+    // id = this.httpService.getAccountID(this.account);
+    // return id
   }
 }
 

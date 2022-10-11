@@ -4,16 +4,19 @@
     <tr>
       <th scope="col">Date</th>
       <th scope="col">Event Name</th>
-      <th scope="col">Invited</th>
-      <th scope="col"> (Editting tools // NGIF)</th>
     </tr>
     </thead>
+  <tbody>
+  <tr *ngFor="let event of eventList">
+    <td>{{event.eventDate | date: 'shortDate' }}</td>
+
+    <td class="eventName"  (click)="openEvent(event)">{{event.eventName}}</td>
 
 
 
 
   </table>
-<app-event *ngFor="let event of eventList" [event]="event" (click)="openEvent()"></app-event>
+<!--<app-event *ngFor="let event of eventList" [event]="event"></app-event>-->
 
 
 <div class="m-3">
@@ -24,6 +27,4 @@
 
 
 </div>
-
-<button (click)="refresh()">refresh test</button>
 

@@ -45,7 +45,7 @@
     },
     {
       "id": "26f0b662-a733-4547-8485-3d9b7e0d329a",
-      "creatorID": "test",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "10/6/2022",
       "eventName": "EEE",
       "invited": [
@@ -54,21 +54,21 @@
     },
     {
       "id": "d67596ce-32f5-4b2e-a57a-9176e3c526fc",
-      "creatorID": "test",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "10/12/2022",
       "eventName": "Test",
       "invited": {}
     },
     {
       "id": "76e473b1-4ea6-4359-a2a2-b82f4cc04593",
-      "creatorID": "test",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "10/15/2022",
       "eventName": "Em",
       "invited": {}
     },
     {
       "id": "fc2259fb-4403-41d8-8998-bcd641aa0c55",
-      "creatorID": "test",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "2022-10-21T05:00:00.000Z",
       "eventName": "October Event",
       "invited": {}

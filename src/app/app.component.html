@@ -6,16 +6,23 @@
 
 
 <div *ngIf ="!isRegistering && isLoggedIn">
-    <app-nav-bar></app-nav-bar>
+  <app-nav-bar></app-nav-bar>
 
-<table style="width:80%">
-  <tr>
-    <th>  <app-event-list></app-event-list> </th>
-    <th>   </th>
-    <th>  <app-event-input></app-event-input> </th>
-  </tr>
-</table>
-
+  <div *ngIf ="selectedEvent === null">
+  <table style="width:80%">
+    <tr>
+      <th>  <app-event-list></app-event-list> </th>
+      <th>   </th>
+      <th>  <app-event-input></app-event-input> </th>
+    </tr>
+  </table>
+  </div>
+  <div>
+    <app-event *ngIf ="selectedEvent !== null"
+               [event]="selectedEvent">
+      
+    </app-event>
+  </div>
 
 
 

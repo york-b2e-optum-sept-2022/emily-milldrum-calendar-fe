@@ -34,10 +34,10 @@ export class HttpService {
 
   deleteEvent(id: string) {
     console.log('delete event http s' + id);
-
+    console.log('http://localhost:3000/events/' + id);
     return this.httpClient.delete<any>('http://localhost:3000/events/' + id
     )//as Observable<string>;
-    console.log('http://localhost:3000/events/' + id);
+
   }
 
   findEvent(eventDate: any){
@@ -50,6 +50,10 @@ export class HttpService {
     return this.httpClient.post(
       'http://localhost:3000/events', event
     ) as Observable<IEvent>;
+  }
+
+  getAccount(account: IAccount){
+
   }
 
 }

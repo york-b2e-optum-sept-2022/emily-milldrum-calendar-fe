@@ -1,17 +1,30 @@
+<h4>Event List</h4>
 <table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Date</th>
+    <th scope="col">Event Name</th>
+    <th scope="col">Invited</th>
+    <th scope="col"> (Editting tools // NGIF)</th>
+  </tr>
+  </thead>
   <tbody>
 <tr>
-<th>{{event.eventDate | date: 'shortDate' }}</th>
+<td>{{event.eventDate | date: 'shortDate' }}</td>
 
-<td>{{event.eventName}}</td>
+<td class="eventName">{{event.eventName}}</td>
 
 <td><div *ngFor="let person of event.invited.id">
   {{person}}
 </div></td>
 
-<td><button (click)="onUpdateClick(event)">✎</button>
+
+<td *ngIf="this.account?.id == event.creatorID"
+><button (click)="onUpdateClick(event)">✎</button>
   <button (click)="onDeleteClick(event)">❌</button>
 </td>
 
 </tr>
 </table>
+
+<button (click)="closeEvent()">back to list</button>
