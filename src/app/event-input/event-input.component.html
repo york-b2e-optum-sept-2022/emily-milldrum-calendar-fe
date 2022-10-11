@@ -18,7 +18,7 @@
             (dateSelect)="onDateSelect($event)"
 ></ngb-datepicker>
 
-  {{ dateSelect | json }}
+<!--  {{ dateSelect | json }}-->
 
 
 <div class="row">
@@ -30,13 +30,12 @@
 <!--    <button ngbDropdownItem *ngFor="let account of accountList">{{account.firstName}} {{account.lastName}}</button>-->
 <!--      </div>-->
 <!--    </div>-->
-    <div *ngFor="let account of accountList">
-      <input ngModel name="invites.{{account}}" type="checkbox" id="{{account}}" (change)="eventCheck($event)">
-<!--      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">-->
+<!--    <div *ngFor="let account of accountList">-->
+<!--      <input ngModel name="invites" type="checkbox" id="{{account}}" value="{{account.value}}" [(ngModel)]="account.checked" (change)="eventCheck($event)">-->
+<!--&lt;!&ndash;      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">&ndash;&gt;-->
+<!--      {{account.firstName}} {{account.lastName}}-->
 
-      {{account.firstName}} {{account.lastName}}
-
-    </div>
+<!--    </div>-->
 
 
 <!--    <div class="col-12">-->

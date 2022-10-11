@@ -15,6 +15,7 @@ export class EventComponent implements OnInit {
   @Input() event!: IEvent;
 
   onDestroy = new Subject();
+  private dateCovert: string | undefined;
 
   constructor(private eventService: EventService) {
     this.eventService.$event.pipe(takeUntil(this.onDestroy))
@@ -42,6 +43,7 @@ export class EventComponent implements OnInit {
     this.onDestroy.next(null);
     this.onDestroy.complete();
   }
+
 
 
 }

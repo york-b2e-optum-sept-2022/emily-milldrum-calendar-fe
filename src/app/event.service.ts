@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {IEvent} from "./interfaces/IEvent";
 import {BehaviorSubject, first} from "rxjs";
 import {HttpService} from "./http.service";
-import {uuid} from "uuidv4";
 import {AccountService} from "./account.service";
 import {v4 as uuidv4} from "uuid";
+import {IAccount} from "./interfaces/IAccount";
 
 @Injectable({
   providedIn: 'root'
@@ -53,19 +53,21 @@ export class EventService {
     })
   }
 
-  createEvent(eventForm: IEvent, dateConvert: string){
+  createEvent(eventForm: IEvent, dateConvert: Date, eventList: IAccount[]){
     console.log('create event e s')
     if (eventForm.eventName.length == 0){
       this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
     }
 
    //TODO Validation
-        const event: IEvent = {
+
+    const event: IEvent = {
           id: uuidv4(),
           creatorID: 'test',
           eventDate: dateConvert,
           eventName: eventForm.eventName,
-          invited: [eventForm.invited],
+          invited: {
+            id: eventList}
 
         }
     console.log(eventForm.eventDate)
@@ -81,5 +83,17 @@ export class EventService {
       }
     })
       }
+
+      dateSearch(convertFromDate: Date, convertToDate: Date){
+        console.log('e s datesearch' + convertFromDate + " " + convertToDate)
+        // @ts-ignore
+        // this.$eventList.next(
+        //   this.curEventList.filter(
+        //     m => new Date(m.eventDate)
+        //    >= new Date(convertFromDate)
+        //   &&
+        //       new Date(m.eventDate) <= new Date(convertToDate)
+        // ));
+  }
 
 }

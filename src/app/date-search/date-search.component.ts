@@ -7,6 +7,7 @@
 import {Component} from '@angular/core';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {from} from "rxjs";
+import {EventService} from "../event.service";
 
 @Component({
   selector: 'app-date-search',
@@ -19,7 +20,13 @@ export class DateSearchComponent {
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
 
-  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+  convertToDate!: Date;
+  convertFromDate: Date | null = null;
+
+
+  constructor(private calendar: NgbCalendar,
+              public formatter: NgbDateParserFormatter,
+              private eventService: EventService) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
@@ -27,8 +34,12 @@ export class DateSearchComponent {
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
+      this.convertFromDate = new Date(this.fromDate.year,
+        this.fromDate.month - 1, this.fromDate.day)
     } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
+      this.convertToDate = new Date(this.toDate.year, this.toDate.month - 1,
+        this.toDate.day)
     } else {
       this.toDate = null;
       this.fromDate = date;
@@ -54,15 +65,9 @@ export class DateSearchComponent {
   }
 
   goButton(){
-    //TODO date error handling
-    // if (this.toDate || this.fromDate == undefined){
-    //   error.message('date missing')
-    // }
-    // else {
-      console.log(this.fromDate?.month + "/" + this.fromDate?.day + "/"
-        + this.fromDate?.year);
-      console.log(this.toDate?.month + "/" + this.toDate?.day + "/"
-        + this.toDate?.year);
+
+      // @ts-ignore
+    this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
   }
 }
 

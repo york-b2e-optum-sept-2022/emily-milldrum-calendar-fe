@@ -1,7 +1,10 @@
+import {IAccount} from "./IAccount";
+
 export interface IEvent{
   id: string;
   creatorID: string;
-  eventDate: string;
+  eventDate: Date;
   eventName: string;
-  invited: [{ }];
+  invited: {
+    id: IAccount[]};
 }

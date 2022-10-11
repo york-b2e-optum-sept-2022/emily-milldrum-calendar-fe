@@ -1,11 +1,11 @@
 <table class="table table-striped">
   <tbody>
 <tr>
-<th>{{event.eventDate}}</th>
+<th>{{event.eventDate | date: 'shortDate' }}</th>
 
 <td>{{event.eventName}}</td>
 
-<td><div *ngFor="let person of event.invited">
+<td><div *ngFor="let person of event.invited.id">
   {{person}}
 </div></td>
 
