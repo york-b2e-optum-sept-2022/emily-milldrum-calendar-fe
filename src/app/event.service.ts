@@ -4,6 +4,7 @@ import {BehaviorSubject, first} from "rxjs";
 import {HttpService} from "./http.service";
 import {uuid} from "uuidv4";
 import {AccountService} from "./account.service";
+import {v4 as uuidv4} from "uuid";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ import {AccountService} from "./account.service";
 export class EventService {
   curEventList: IEvent[] =[];
   $eventList = new BehaviorSubject<IEvent[]>([]);
+  $event = new BehaviorSubject<IEvent | null>(null);
 
 
   $eventError = new BehaviorSubject<string | null>(null);
   private readonly EVENT_INVALID_EVENT_NAME = "You must provide a valid event name";
+  private readonly EVENT_HTTP_ERROR = "There was an error with the HTTP server";
 
   constructor(private httpService: HttpService, private accountService: AccountService) {
     this.httpService.getEvents().pipe(first()).subscribe({
@@ -50,7 +53,7 @@ export class EventService {
     })
   }
 
-  createEvent(eventForm: IEvent){
+  createEvent(eventForm: IEvent, dateConvert: string){
     console.log('create event e s')
     if (eventForm.eventName.length == 0){
       this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
@@ -58,21 +61,23 @@ export class EventService {
 
    //TODO Validation
         const event: IEvent = {
-          id: uuid(),
+          id: uuidv4(),
           creatorID: 'test',
-          eventDate: eventForm.eventDate,
+          eventDate: dateConvert,
           eventName: eventForm.eventName,
-          invited: [],
+          invited: [eventForm.invited],
 
         }
-
+    console.log(eventForm.eventDate)
     this.httpService.createEvent(event).pipe(first()).subscribe({
       next: (event) => {
-        this.$eventList.next(event);
+        //this.$event.next(event);
+        this.getEvents();
+        console.log('http adding ' + event);
       },
       error: (err) => {
         console.error(err)
-        this.$registrationError.next(this.REGISTER_HTTP_ERROR_MESSAGE)
+        this.$eventError.next(this.EVENT_HTTP_ERROR)
       }
     })
       }

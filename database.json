@@ -26,7 +26,7 @@
     {
       "id": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d666",
       "creatorID": "test2@test2.com",
-      "eventDate": "10/10/22",
+      "eventDate": "10/10/2022",
       "eventName": "October Event",
       "invited": [
         "Lee"
@@ -35,12 +35,21 @@
     {
       "id": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d111",
       "creatorID": "test@test.com",
-      "eventDate": "12/10/22",
+      "eventDate": "12/10/2022",
       "eventName": "December Event",
       "invited": [
         "Em",
         "Lee",
         "Kevin"
+      ]
+    },
+    {
+      "id": "26f0b662-a733-4547-8485-3d9b7e0d329a",
+      "creatorID": "test",
+      "eventDate": "10/6/2022",
+      "eventName": "EEE",
+      "invited": [
+        null
       ]
     }
   ]

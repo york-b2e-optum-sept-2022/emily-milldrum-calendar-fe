@@ -48,7 +48,7 @@ export class HttpService {
   createEvent(event: IEvent){
     console.log('create event') //TODO
     return this.httpClient.post(
-      'http://localhost:3000/event', event
+      'http://localhost:3000/events', event
     ) as Observable<IEvent>;
   }
 

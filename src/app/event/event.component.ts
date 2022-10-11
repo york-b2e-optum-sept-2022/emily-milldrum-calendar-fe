@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IEvent} from "../interfaces/IEvent";
 import {EventService} from "../event.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-event',
@@ -9,8 +10,20 @@ import {EventService} from "../event.service";
 })
 export class EventComponent implements OnInit {
 
+  events: IEvent | null = null;
+
   @Input() event!: IEvent;
-  constructor(private eventService: EventService) { }
+
+  onDestroy = new Subject();
+
+  constructor(private eventService: EventService) {
+    this.eventService.$event.pipe(takeUntil(this.onDestroy))
+      .subscribe(
+        (event) => {
+          this.events = event;
+        }
+      )
+  }
 
   ngOnInit(): void {
   }
@@ -22,7 +35,12 @@ export class EventComponent implements OnInit {
 
   onDeleteClick(event: IEvent){
     console.log('delete click works')
-    this.eventService.deleteEvent(this.event);
+    this.eventService.deleteEvent(event);
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy.next(null);
+    this.onDestroy.complete();
   }
 
 

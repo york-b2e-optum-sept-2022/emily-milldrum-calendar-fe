@@ -5,7 +5,9 @@
 
 <td>{{event.eventName}}</td>
 
-<td>TODO invited</td>
+<td><div *ngFor="let person of event.invited">
+  {{person}}
+</div></td>
 
 <td><button (click)="onUpdateClick(event)">✎</button>
   <button (click)="onDeleteClick(event)">❌</button>

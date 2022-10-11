@@ -12,7 +12,6 @@ import { EventInputComponent } from './event-input/event-input.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventComponent } from './event/event.component';
 import { DateSearchComponent } from './date-search/date-search.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +27,7 @@ import { DateSearchComponent } from './date-search/date-search.component';
         BrowserModule,
         NgbModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,5 +3,5 @@ export interface IEvent{
   creatorID: string;
   eventDate: string;
   eventName: string;
-  invited: [];
+  invited: [{ }];
 }

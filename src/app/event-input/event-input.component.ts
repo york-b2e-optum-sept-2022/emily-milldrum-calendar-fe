@@ -32,14 +32,19 @@ export class EventInputComponent implements OnInit {
   //   this.accountList = [...this.list];
   // }
   dateSelect: string = "";
+  model: any;
+  dateConvert: string = "";
 
 
   onDateSelect(date: NgbDate){
-    return date.month
+    //return date.month
     console.log(date.day, date.month, date.year);
+    this.dateConvert = date.month.toString() + "/" +
+      date.day.toString() + "/" + date.year.toString();
+    console.log(this.dateConvert)
   }
 
-  eventCheck(event: any){
+  eventCheck(event: any) {
     //TODO add account to invite
   }
 
@@ -47,6 +52,11 @@ export class EventInputComponent implements OnInit {
     console.log('create event works')
     console.log(eventForm.value);
 
-    this.eventService.createEvent(eventForm.value as IEvent)
+    this.eventService.createEvent(eventForm.value as IEvent, this.dateConvert)
   }
+  select(model: any){
+    console.log(model);
+  }
+
+
 }
