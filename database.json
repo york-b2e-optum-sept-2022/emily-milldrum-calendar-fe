@@ -67,10 +67,17 @@
       "invited": {}
     },
     {
-      "id": "fc2259fb-4403-41d8-8998-bcd641aa0c55",
+      "id": "ae880d35-4ee2-47b7-82c6-b2c89b783d44",
+      "creatorID": "",
+      "eventDate": "2022-10-19T05:00:00.000Z",
+      "eventName": "Test",
+      "invited": {}
+    },
+    {
+      "id": "c05d0f19-7cd5-41e6-b887-82eaba0a8362",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "2022-10-21T05:00:00.000Z",
-      "eventName": "October Event",
+      "eventDate": "2021-04-09T05:00:00.000Z",
+      "eventName": "April Event",
       "invited": {}
     }
   ]

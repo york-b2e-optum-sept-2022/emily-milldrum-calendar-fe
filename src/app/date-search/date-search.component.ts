@@ -42,7 +42,10 @@ export class DateSearchComponent {
     } else {
       this.toDate = null;
       this.fromDate = date;
+      this.convertFromDate = new Date(this.fromDate.year,
+        this.fromDate.month - 1, this.fromDate.day)
     }
+
   }
 
   isHovered(date: NgbDate) {
@@ -64,7 +67,8 @@ export class DateSearchComponent {
   }
 
   goButton(){
-
+    console.log(this.toDate)
+    console.log(this.fromDate)
     this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
   }
 }

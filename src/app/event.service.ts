@@ -18,7 +18,7 @@ export class EventService {
   $eventError = new BehaviorSubject<string | null>(null);
   private readonly EVENT_INVALID_EVENT_NAME = "You must provide a valid event name";
   private readonly EVENT_HTTP_ERROR = "There was an error with the HTTP server";
-  private account: IAccount | null = null;
+  private account!: IAccount;
   private accountID: string = "";
 
   constructor(private httpService: HttpService,
@@ -31,7 +31,9 @@ export class EventService {
     })
 
     this.accountService.$account.subscribe(account => {
-      this.account = account
+      if (account) {
+        this.account = account
+      }
     })
   }
 
@@ -44,6 +46,7 @@ export class EventService {
       next: (data) => {
         console.log(data);
         this.getEvents();
+        this.$selectedEvent.next(null);
       },
       error: (err) => {
         console.error(err);
@@ -68,8 +71,7 @@ export class EventService {
 
     // @ts-ignore
     if (this.account.id != null){
-      //TODO Fix bs null
-      // this.accountID = this.account?.id;
+      this.accountID = this.account?.id;
     }
    //TODO Validation
     const event: IEvent = {
@@ -96,16 +98,15 @@ export class EventService {
     })
       }
 
-  dateSearch(convertFromDate: Date | null, convertToDate: Date){
+  dateSearch(convertFromDate: Date, convertToDate: Date){
         console.log('e s datesearch' + convertFromDate + " " + convertToDate)
-        // @ts-ignore
-        // this.$eventList.next(
-        //   this.curEventList.filter(
-        //     m => new Date(m.eventDate)
-        //    >= new Date(convertFromDate)
-        //   &&
-        //       new Date(m.eventDate) <= new Date(convertToDate)
-        // ));
+        this.$eventList.next(
+          this.curEventList.filter(
+            m => new Date(m.eventDate)
+           >= new Date(convertFromDate)
+          &&
+              new Date(m.eventDate) <= new Date(convertToDate)
+        ));
   }
 
   openEvent(event: IEvent) {
