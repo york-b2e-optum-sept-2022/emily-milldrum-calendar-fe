@@ -1,9 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-//
-// @Component({
-//   selector: 'app-date-search',
-//
-// })
 import {Component} from '@angular/core';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {EventService} from "../event.service";
@@ -67,8 +61,6 @@ export class DateSearchComponent {
   }
 
   goButton(){
-    console.log(this.toDate)
-    console.log(this.fromDate)
     this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
   }
 }

@@ -15,6 +15,7 @@ export class EventListComponent implements OnInit {
   @Input() event!: IEvent;
 
   constructor(private eventService: EventService) {
+    //get event list
     this.eventService.$eventList.pipe(takeUntil(this.onDestroy)).subscribe(
       eventList => {
         return this.eventList = eventList;
@@ -27,20 +28,12 @@ export class EventListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  refresh(){
-    //TODO
-    console.log('refresh test works')
-  }
-
   ngOnDestroy(): void {
     this.onDestroy.next(null);
     this.onDestroy.complete();
   }
 
-
   openEvent(event: IEvent) {
-    console.log('open event works')
-    console.log(event)
     this.eventService.openEvent(event)
   }
 }

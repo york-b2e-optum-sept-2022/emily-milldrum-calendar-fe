@@ -16,6 +16,7 @@ export class AppComponent implements OnDestroy {
   title = 'emily-milldrum-calendar-fe';
   isRegistering: boolean = false;
   isLoggedIn: boolean = false;
+  isEditing: boolean = false;
   selectedEvent: IEvent | null = null;
 
 
@@ -33,6 +34,9 @@ export class AppComponent implements OnDestroy {
 
     this.accountService.$isRegistering.pipe(takeUntil(this.onDestroy))
       .subscribe(isRegistering => {this.isRegistering = isRegistering})
+
+    this.eventService.$isEditing.pipe(takeUntil(this.onDestroy))
+      .subscribe(isEditing => {this.isEditing = isEditing})
 
     this.eventService.$selectedEvent.pipe(takeUntil(this.onDestroy)).subscribe(
       curEvent => {this.selectedEvent = curEvent}

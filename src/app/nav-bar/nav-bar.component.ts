@@ -13,6 +13,7 @@ export class NavBarComponent implements OnInit {
   onDestroy = new Subject();
 
   constructor(private accountService: AccountService) {
+    //get account info for name display
     this.accountService.$account
       .pipe(takeUntil(this.onDestroy))
       .subscribe(account => {

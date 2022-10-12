@@ -1,4 +1,4 @@
-import {IAccount} from "./IAccount";
+import {IInvite} from "./IInvite";
 
 export interface IEvent{
   id: string;
@@ -6,5 +6,5 @@ export interface IEvent{
   eventDate: Date;
   eventName: string;
   invited: {
-    id: IAccount[]};
+    id: IInvite[]};
 }

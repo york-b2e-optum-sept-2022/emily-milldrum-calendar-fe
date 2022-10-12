@@ -6,11 +6,12 @@
     <input ngModel name="eventName" class="form-control" id="eventNameInput" placeholder="Enter Event Name">
   </div>
 
+<!--  [(ngModel)]="event.eventName"-->
 
 
 
 
-<ngb-datepicker ngModel name="date" id="dateInput" [(ngModel)]="dateSelect" (ngModelChange)="select(dateSelect)" [minDate]="{year: 1, month: 1, day: 1}"
+  <ngb-datepicker ngModel name="date" id="dateInput" [(ngModel)]="dateSelect" (ngModelChange)="select(dateSelect)" [minDate]="{year: 1, month: 1, day: 1}"
                 [maxDate]="{year: 9999, month: 12, day: 31}"
 
 
@@ -30,12 +31,13 @@
 <!--    <button ngbDropdownItem *ngFor="let account of accountList">{{account.firstName}} {{account.lastName}}</button>-->
 <!--      </div>-->
 <!--    </div>-->
-<!--    <div *ngFor="let account of accountList">-->
-<!--      <input ngModel name="invites" type="checkbox" id="{{account}}" value="{{account.value}}" [(ngModel)]="account.checked" (change)="eventCheck($event)">-->
-<!--&lt;!&ndash;      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">&ndash;&gt;-->
-<!--      {{account.firstName}} {{account.lastName}}-->
+    <div *ngFor="let account of accountList">
+      <input ngModel name="invites" type="checkbox" id="{{account}}" (change)="eventCheck($event)">
+<!--      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">-->
+<!--      value="{{account.value}}" [(ngModel)]="account.checked"-->
+      {{account.firstName}} {{account.lastName}}
 
-<!--    </div>-->
+    </div>
 
 
 <!--    <div class="col-12">-->
@@ -51,7 +53,14 @@
 
 </div>
   </form>
+    <div *ngIf="!isEditing">
     <button (click)="createEvent(eventForm)"  type="submit">Create Event</button>
+    </div>
+    <div *ngIf="isEditing">
+      <button (click)="updateEvent(eventForm)"  type="submit" >Update Event</button>
+      <button (click)="cancelUpdate()"  type="submit" >Cancel</button>
+
+    </div>
 
     {{errorMessage}}
 

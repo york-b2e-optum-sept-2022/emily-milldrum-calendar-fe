@@ -18,10 +18,15 @@
   </table>
   </div>
   <div>
-    <app-event *ngIf ="selectedEvent !== null"
+    <app-event *ngIf ="(selectedEvent !== null) && !isEditing"
                [event]="selectedEvent">
-      
+
     </app-event>
+    <app-event-input
+      *ngIf ="(selectedEvent !== null) && isEditing"
+     [event]="selectedEvent">
+
+    </app-event-input>
   </div>
 
 

@@ -8,6 +8,8 @@ import {HttpService} from "./http.service";
   providedIn: 'root'
 })
 export class AccountService {
+
+  //variables
 //TODO change to null for production & value for testing
   $account = new BehaviorSubject<IAccount | null>(
     {
@@ -28,6 +30,8 @@ export class AccountService {
   $registrationError = new BehaviorSubject<string | null>(null);
   $loginError = new BehaviorSubject<string | null>(null);
 
+
+  //error messages
   private readonly LOGIN_INVALID = "Login is invalid"
   private readonly LOGIN_BLANK = "Please fill in both login fields"
   private readonly LOGIN_HTTP_ERROR = "Unable to login, try again"
@@ -54,19 +58,20 @@ export class AccountService {
           this.accountList.push(testArr[i]);
         }
 
-        // @ts-ignore
         this.$accountList.next(this.accountList);
 
         console.log('testArr to accountlist ' + this.$accountList);
       },
       error: (err) => {
-        console.error('db' + err);
+        console.error(err);
+        this.$loginError.next(this.LOGIN_HTTP_ERROR)
       }
     })
 
 
   }
 
+  //account login
   login(email: string, password: string){
     if((email == null) || (password == null)){
       this.$loginError.next(this.LOGIN_BLANK);
@@ -100,6 +105,8 @@ export class AccountService {
     console.log(this.$account)
   }
 
+
+  //register new account
   register(regForm: IAccount){
 
     // field validation
@@ -141,13 +148,6 @@ export class AccountService {
       },
     })
     this.$isRegistering.next(false);
-  }
-
-  getAccountID(){
-
-
-    // id = this.httpService.getAccountID(this.account);
-    // return id
   }
 }
 
