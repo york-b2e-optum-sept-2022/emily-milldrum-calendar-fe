@@ -42,7 +42,6 @@ export class EventComponent implements OnInit {
   }
 
   closeEvent(){
-    console.log('close clicked')
     this.eventService.closeEvent();
   }
 }

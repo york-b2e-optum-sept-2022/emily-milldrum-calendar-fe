@@ -48,7 +48,7 @@ export class HttpService {
 
   updateEvent(event: IEvent){
     return this.httpClient.put(
-      'http://localhost:3000/events' + event.id, event
+      'http://localhost:3000/events/' + event.id, event
     )as Observable<IEvent>
   }
 

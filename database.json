@@ -76,9 +76,10 @@
     {
       "id": "c05d0f19-7cd5-41e6-b887-82eaba0a8362",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "2021-04-09T05:00:00.000Z",
-      "eventName": "April Event",
-      "invited": {}
+      "eventDate": "2022-10-13T05:00:00.000Z",
+      "invited": {
+        "id": []
+      }
     }
   ]
 }

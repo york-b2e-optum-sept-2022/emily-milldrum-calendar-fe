@@ -47,20 +47,15 @@ export class AccountService {
   constructor(
     private httpService: HttpService
   ) {
+    //get list of accounts
     this.httpService.getAccounts().subscribe({
       next: (data) => {
 
-        const testArr = Object.values(data).map(y => y.valueOf());
-        console.log(testArr);
-        //let result = names.map(a => a.testing);
-        for (let i = 0; i < testArr.length; i++){
-          console.log(testArr[i]);
-          this.accountList.push(testArr[i]);
+        const getAccounts = Object.values(data).map(y => y.valueOf());
+        for (let i = 0; i < getAccounts.length; i++){
+          this.accountList.push(getAccounts[i]);
         }
-
         this.$accountList.next(this.accountList);
-
-        console.log('testArr to accountlist ' + this.$accountList);
       },
       error: (err) => {
         console.error(err);
@@ -102,7 +97,6 @@ export class AccountService {
 
   logout(){
     this.$account.next(null);
-    console.log(this.$account)
   }
 
 
@@ -112,7 +106,6 @@ export class AccountService {
     // field validation
     if (regForm.email.length < 5 || !regForm.email.includes('@') || !regForm.email.includes('.')) {
       this.$registrationError.next(this.REGISTER_INVALID_EMAIL_MESSAGE);
-      console.log('email error')
       return;
     }
     if (regForm.firstName.length < 1) {

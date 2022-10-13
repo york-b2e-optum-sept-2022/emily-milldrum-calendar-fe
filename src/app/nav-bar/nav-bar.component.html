@@ -2,7 +2,9 @@
   <nav class="navbar navbar-light bg-light justify-content-between">
 
   <a class="navbar-brand">{{account.firstName}} {{account.lastName}}'s Event Planner</a>
-  <form class="form-inline">
+    <button (click)="logoutClick()">Logout</button>
+
+    <form class="form-inline">
 
     <app-date-search></app-date-search>
 <!--    -->

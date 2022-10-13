@@ -12,16 +12,15 @@ export class EventListComponent implements OnInit {
 
   eventList: IEvent[] = [];
   onDestroy = new Subject();
-  @Input() event!: IEvent;
+//  @Input() event!: IEvent;
 
   constructor(private eventService: EventService) {
     //get event list
     this.eventService.$eventList.pipe(takeUntil(this.onDestroy)).subscribe(
       eventList => {
-        return this.eventList = eventList;
+         this.eventList = eventList;
       }
     );
-    console.log('event list:' + this.eventList);
     //TODO Error message
   }
 

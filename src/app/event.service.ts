@@ -129,14 +129,16 @@ export class EventService {
 
 
   //update selected event
-  updateEvent(editEvent: IEvent, dateConvert: Date, eventList: IInvite[]){
-    console.log(editEvent)
+  //
+  // updateEvent(editEvent: IEvent, dateConvert: Date, eventList: IInvite[]){
+    updateEvent(updateEvent: any){
+    console.log(updateEvent)
 
     const event: IEvent  = {
-      id: "test",
-      creatorID: editEvent.creatorID,
-      eventDate: dateConvert,
-      eventName: editEvent.eventName,
+      id: updateEvent.id,
+      creatorID: updateEvent.creatorID,
+      eventDate: updateEvent.eventDate,
+      eventName: updateEvent.eventName,
       invited: {
         id: []}
 

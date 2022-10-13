@@ -47,10 +47,7 @@ export class AppComponent implements OnDestroy {
     this.modalService.open(modal);
   }
 
-  logoutClick(){
-    console.log('logout clicked')
-    this.accountService.logout();
-  }
+
 
   ngOnDestroy() {
     this.onDestroy.next(null);

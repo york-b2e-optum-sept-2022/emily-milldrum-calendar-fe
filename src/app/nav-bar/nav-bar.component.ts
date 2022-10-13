@@ -29,4 +29,7 @@ export class NavBarComponent implements OnInit {
     this.onDestroy.complete();
   }
 
+  logoutClick(){
+    this.accountService.logout();
+  }
 }

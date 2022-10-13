@@ -22,7 +22,6 @@ export class EventInputComponent implements OnInit {
   eventInc!: IEvent | null;
   @Input() event!: IEvent;
 
-  checkedStatus: boolean = false;
   isEditing: boolean = true;
 
   model: any;
@@ -30,6 +29,7 @@ export class EventInputComponent implements OnInit {
   errorMessage: string | null = null;
   dateSelect: string = "";
   dateConvert!: Date;
+  isChecked!: boolean;
 
   constructor(private accountService: AccountService,
               private eventService: EventService) {
@@ -68,35 +68,38 @@ export class EventInputComponent implements OnInit {
     this.dateConvert = new Date(date.year, date.month - 1, date.day)
   }
 
+  eventCheck(event: any, account: IAccount, isChecked: boolean) {
 
-  //TODO invite select & create invite [] format
-  options = [
-    {name:'OptionA', value:'1', checked:true},
-    {name:'OptionB', value:'2', checked:false},
-    {name:'OptionC', value:'3', checked:true}
-  ]
+    console.log(isChecked)
+    console.log(this.isChecked)
+    console.log(account)
 
-  eventCheck(event: any) {
-    if (event.checkedStatus) {
-      const invited =   {
+    if (event) {
+      const invited: IInvite =   {
         id: "",
         email: "",
         firstName: "",
         lastName: "",
       }
       this.invitedList.push(invited)
-    }else (!event.checkedStatus)
+    }else (!event)
     {
       console.log('to remove')
     }
     //this.invitedList.push(account);
-    console.log(this.invitedList)
-    console.log(this.account?.firstName);
-    console.log(event.value);
-    console.log(event.checkedStatus);
-    return this.options
-      .filter(opt => opt.checked)
-      .map(opt => opt.value)
+  }
+
+  invite(account: IAccount){
+    console.log(account)
+    const newInvite: IInvite = {
+      id: account.id,
+      email: account.email,
+      firstName: account.firstName,
+      lastName: account.lastName
+    }
+    console.log(newInvite);
+    //this.invitedList.push(newInvite)
+    console.log(this.invitedList);
   }
 
   createEvent(eventForm: NgForm){
@@ -107,10 +110,23 @@ export class EventInputComponent implements OnInit {
   }
 
   updateEvent(eventForm: NgForm){
-    this.eventService.updateEvent(
-      eventForm.value as IEvent,
-      this.dateConvert,
-      this.invitedList);
+
+    // @ts-ignore
+    const updateEvent = {
+      id: this.eventInc?.id,
+      creatorID: this.event.creatorID,
+      eventDate: this.dateConvert,
+      eventName: eventForm.name,
+      invited: {
+        id: []}
+    }
+    this.eventService.updateEvent(updateEvent);
+    this.eventService.$isEditing.next(false)
+    this.eventService.$selectedEvent.next(null)
+    // this.eventService.updateEvent(
+    //   eventForm.value as IEvent,
+    //   this.dateConvert,
+    //   this.invitedList);
   }
 
   cancelUpdate(){
@@ -118,12 +134,16 @@ export class EventInputComponent implements OnInit {
   }
 
   //for date select
+
   select(model: any){
-    console.log(model);
+    console.log(model + "test");
   }
 
   ngOnDestroy() {
     this.onDestroy.next(null);
     this.onDestroy.complete();
+
+
+
   }
 }
