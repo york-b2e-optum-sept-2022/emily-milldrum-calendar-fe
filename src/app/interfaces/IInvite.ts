@@ -1,6 +1,9 @@
 export interface IInvite{
   id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
+  invited: {
+    accountID: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    }
 }

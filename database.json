@@ -44,33 +44,10 @@
       ]
     },
     {
-      "id": "26f0b662-a733-4547-8485-3d9b7e0d329a",
-      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "10/6/2022",
-      "eventName": "EEE",
-      "invited": [
-        null
-      ]
-    },
-    {
-      "id": "d67596ce-32f5-4b2e-a57a-9176e3c526fc",
-      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "10/12/2022",
-      "eventName": "Test",
-      "invited": {}
-    },
-    {
-      "id": "ae880d35-4ee2-47b7-82c6-b2c89b783d44",
-      "creatorID": "",
-      "eventDate": "2022-10-19T05:00:00.000Z",
-      "eventName": "Test",
-      "invited": {}
-    },
-    {
       "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "2022-10-31T05:00:00.000Z",
-      "eventName": "Test7",
+      "eventName": "Halloween Event",
       "invited": {
         "id": []
       }
@@ -81,12 +58,17 @@
       "eventDate": "2022-10-21T05:00:00.000Z",
       "eventName": "Testing",
       "invited": {}
-    },
+    }
+  ],
+  "invites": [
     {
-      "id": "74c8871c-70fa-46c0-ab9c-94bba9d8cb6d",
-      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventName": "",
-      "invited": {}
+      "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
+      "invited": {
+        "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+        "email": "test2@test.com",
+        "firstName": "Jackie",
+        "lastName": "Chan"
+      }
     }
   ]
 }

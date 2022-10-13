@@ -46,15 +46,15 @@ export class InviteComponent implements OnInit {
   }
 
   addInvite(account: IAccount){
-    const newInvite: IInvite = {
-      id: account.id,
-      email: account.email,
-      firstName: account.firstName,
-      lastName: account.lastName
-    }
-    console.log(newInvite);
-    this.invitedList.push(newInvite)
-    console.log(this.invitedList);
+    // const newInvite: IInvite = {
+    //   id: event.id,
+    //   email: account.email,
+    //   firstName: account.firstName,
+    //   lastName: account.lastName
+    // }
+    // console.log(newInvite);
+    // this.invitedList.push(newInvite)
+    // console.log(this.invitedList);
 
   }
 

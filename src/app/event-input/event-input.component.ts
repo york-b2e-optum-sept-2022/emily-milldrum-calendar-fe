@@ -95,41 +95,41 @@ export class EventInputComponent implements OnInit {
     //convert date data to Date format
     this.dateConvert = new Date(date.year, date.month - 1, date.day)
   }
+  //
+  // eventCheck(event: any, account: IAccount, isChecked: boolean) {
+  //
+  //   console.log(isChecked)
+  //   console.log(this.isChecked)
+  //   console.log(account)
+  //
+  //   if (event) {
+  //     const invited: IInvite =   {
+  //       id: "",
+  //       email: "",
+  //       firstName: "",
+  //       lastName: "",
+  //     }
+  //     this.invitedList.push(invited)
+  //   }else (!event)
+  //   {
+  //     console.log('to remove')
+  //   }
+  //   //this.invitedList.push(account);
+  // }
 
-  eventCheck(event: any, account: IAccount, isChecked: boolean) {
-
-    console.log(isChecked)
-    console.log(this.isChecked)
-    console.log(account)
-
-    if (event) {
-      const invited: IInvite =   {
-        id: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-      }
-      this.invitedList.push(invited)
-    }else (!event)
-    {
-      console.log('to remove')
-    }
-    //this.invitedList.push(account);
-  }
-
-  invite(account: IAccount){
-
-    const newInvite: IInvite = {
-      id: account.id,
-      email: account.email,
-      firstName: account.firstName,
-      lastName: account.lastName
-    }
-    console.log(newInvite);
-    //this.invitedList.push(newInvite)
-    console.log(this.invitedList);
-
-  }
+  // invite(account: IAccount){
+  //
+  //   const newInvite: IInvite = {
+  //     id: account.id,
+  //     email: account.email,
+  //     firstName: account.firstName,
+  //     lastName: account.lastName
+  //   }
+  //   console.log(newInvite);
+  //   //this.invitedList.push(newInvite)
+  //   console.log(this.invitedList);
+  //
+  // }
 
   createEvent(eventForm: NgForm){
     this.eventService.createEvent(

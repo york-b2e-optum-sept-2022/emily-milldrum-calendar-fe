@@ -18,23 +18,23 @@
             (dateSelect)="onDateSelect($event)"
 ></ngb-datepicker>
 
-<div class="row">
-<div class="col">
+<!--<div class="row">-->
+<!--<div class="col">-->
 
-    <div *ngFor="let account of accountList">
-<!--      <input name="invites" type="checkbox"  id="{{account}}" [checked]="isChecked" (change)="eventCheck($event, account, isChecked)">-->
-<!--      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">-->
-<!--      value="{{account.value}}" [(ngModel)]="account.checked"-->
+<!--    <div *ngFor="let account of accountList">-->
+<!--&lt;!&ndash;      <input name="invites" type="checkbox"  id="{{account}}" [checked]="isChecked" (change)="eventCheck($event, account, isChecked)">&ndash;&gt;-->
+<!--&lt;!&ndash;      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">&ndash;&gt;-->
+<!--&lt;!&ndash;      value="{{account.value}}" [(ngModel)]="account.checked"&ndash;&gt;-->
 
-      <button class="btn btn-outline-success" *ngIf="!inviteStatus" (click)="invite(account)">{{inviteString}} {{account.firstName}} {{account.lastName}}
-      </button>
-      <button class="btn btn-outline-success" *ngIf="inviteStatus" (click)="invite(account)">{{cancelInviteButton}} {{account.firstName}} {{account.lastName}}
-      </button>
+<!--      <button class="btn btn-outline-success" *ngIf="!inviteStatus" (click)="invite(account)">{{inviteString}} {{account.firstName}} {{account.lastName}}-->
+<!--      </button>-->
+<!--      <button class="btn btn-outline-success" *ngIf="inviteStatus" (click)="invite(account)">{{cancelInviteButton}} {{account.firstName}} {{account.lastName}}-->
+<!--      </button>-->
 
-    </div>
+<!--    </div>-->
 
-</div>
-</div>
+<!--</div>-->
+<!--</div>-->
   </form>
 <br>
 
