@@ -63,12 +63,21 @@
   "invites": [
     {
       "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
-      "invited": {
+      "invited": [
+        {
         "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
         "email": "test2@test.com",
         "firstName": "Jackie",
         "lastName": "Chan"
-      }
+      },
+        {
+          "id": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+          "email": "test2@test.com",
+          "password": "test",
+          "firstName": "Bob",
+          "lastName": "Builder"
+        }
+      ]
     }
   ]
 }

@@ -14,8 +14,8 @@
 
 <td class="eventName">{{event.eventName}}</td>
 
-<td><div *ngFor="let person of event.invited.id">
-  {{person}}
+<td><div *ngFor="let person of this.inviteList.invited">
+  {{person.firstName}} {{person.lastName}}
 </div></td>
 
 
