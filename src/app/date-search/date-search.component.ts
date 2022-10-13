@@ -29,15 +29,21 @@ export class DateSearchComponent {
       this.fromDate = date;
       this.convertFromDate = new Date(this.fromDate.year,
         this.fromDate.month - 1, this.fromDate.day)
+      this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
+
     } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
       this.convertToDate = new Date(this.toDate.year, this.toDate.month - 1,
         this.toDate.day)
+      this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
+
     } else {
       this.toDate = null;
       this.fromDate = date;
       this.convertFromDate = new Date(this.fromDate.year,
         this.fromDate.month - 1, this.fromDate.day)
+      this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
+
     }
 
   }
@@ -60,8 +66,11 @@ export class DateSearchComponent {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  goButton(){
-    this.eventService.dateSearch(this.convertFromDate, this.convertToDate);
+  resetButton(){
+    this.toDate = null;
+    this.fromDate = null;
+    this.eventService.getEvents();
   }
+
 }
 
