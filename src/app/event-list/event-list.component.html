@@ -6,25 +6,14 @@
       <th scope="col">Event Name</th>
     </tr>
     </thead>
+
   <tbody>
   <tr *ngFor="let event of eventList">
     <td>{{event.eventDate | date: 'shortDate' }}</td>
-
     <td class="eventName"  (click)="openEvent(event)">{{event.eventName}}</td>
-
-
-
-
   </table>
-<!--<app-event *ngFor="let event of eventList" [event]="event"></app-event>-->
-
 
 <div class="m-3">
-
-  <!--    <input *ngIf="!item.done" type="checkbox" (change)="eventCheck($event)">-->
-  <!--    <input *ngIf="item.done" type="checkbox" checked (change)="eventCheck($event)">-->
-
-
 
 </div>
 

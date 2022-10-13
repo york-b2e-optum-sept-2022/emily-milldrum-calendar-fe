@@ -19,7 +19,18 @@ export class EventInputComponent implements OnInit {
   incList!: IAccount[];
   invitedList!: IInvite[];
   account: IAccount | null = null;
-  eventInc!: IEvent | null;
+  eventInc: IEvent = {
+    creatorID: "",
+    eventDate: new Date(),
+    eventName: "",
+    id: "",
+    invited: {id: []
+    }
+
+  }
+  //event!: IEvent;
+
+  //from app/list
   @Input() event!: IEvent;
 
   isEditing: boolean = true;
@@ -30,6 +41,11 @@ export class EventInputComponent implements OnInit {
   dateSelect: string = "";
   dateConvert!: Date;
   isChecked!: boolean;
+
+  inviteStatus: boolean = false;
+  inviteString: string = "Invite";
+  cancelInviteButton: string = "Cancel Invite";
+
 
   constructor(private accountService: AccountService,
               private eventService: EventService) {
@@ -43,10 +59,16 @@ export class EventInputComponent implements OnInit {
     //get selected account data to fill fields
     this.eventService.$selectedEvent.pipe(first()).subscribe(selectEvent => {
 
-      this.eventInc = selectEvent
+      if (selectEvent != null){
+        this.eventInc = selectEvent
+        console.log(selectEvent.id)
+        console.log(selectEvent.eventName)
+      } else{
+        console.log('error event input')
+      }
       console.log('current event in event input')
       console.log(this.eventInc)
-      console.log(this.eventInc?.id)
+
     })
 
     //subscribe to editing change
@@ -63,6 +85,12 @@ export class EventInputComponent implements OnInit {
   //   this.accountList = [...this.list];
   // }
 
+  getEventName(){
+    if (this.eventInc.eventName == undefined){
+      return "";
+    } else
+    return this.eventInc?.eventName
+  }
   onDateSelect(date: NgbDate){
     //convert date data to Date format
     this.dateConvert = new Date(date.year, date.month - 1, date.day)
@@ -90,7 +118,7 @@ export class EventInputComponent implements OnInit {
   }
 
   invite(account: IAccount){
-    console.log(account)
+
     const newInvite: IInvite = {
       id: account.id,
       email: account.email,
@@ -100,6 +128,7 @@ export class EventInputComponent implements OnInit {
     console.log(newInvite);
     //this.invitedList.push(newInvite)
     console.log(this.invitedList);
+
   }
 
   createEvent(eventForm: NgForm){
@@ -111,12 +140,11 @@ export class EventInputComponent implements OnInit {
 
   updateEvent(eventForm: NgForm){
 
-    // @ts-ignore
     const updateEvent = {
       id: this.eventInc?.id,
       creatorID: this.event.creatorID,
       eventDate: this.dateConvert,
-      eventName: eventForm.name,
+      eventName: this.eventInc.eventName,
       invited: {
         id: []}
     }

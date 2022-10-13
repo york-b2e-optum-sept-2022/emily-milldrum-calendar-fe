@@ -1,0 +1,18 @@
+<h4>Invite List</h4>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Names</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr><app-invite *ngFor="let account of accountList"
+                  [account]="account"></app-invite></tr>
+
+    <td></td>
+</table>
+
+<div class="m-3">
+
+</div>

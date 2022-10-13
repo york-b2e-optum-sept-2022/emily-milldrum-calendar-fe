@@ -4,22 +4,22 @@
       "id": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "email": "test@test.com",
       "password": "test",
-      "firstName": "Em",
-      "lastName": "M"
+      "firstName": "Emily",
+      "lastName": "Milldrum"
     },
     {
       "id": "b6248e76-4964-4ac7-8636-63166ac4ff51",
       "email": "test2@test.com",
       "password": "test",
-      "firstName": "Z",
-      "lastName": "M"
+      "firstName": "Bob",
+      "lastName": "Builder"
     },
     {
       "id": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
-      "email": "em@.com",
-      "password": "Fart",
-      "firstName": "E",
-      "lastName": "M"
+      "email": "test3@test.com",
+      "password": "test",
+      "firstName": "Jackie",
+      "lastName": "Chan"
     }
   ],
   "events": [
@@ -60,13 +60,6 @@
       "invited": {}
     },
     {
-      "id": "76e473b1-4ea6-4359-a2a2-b82f4cc04593",
-      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "10/15/2022",
-      "eventName": "Em",
-      "invited": {}
-    },
-    {
       "id": "ae880d35-4ee2-47b7-82c6-b2c89b783d44",
       "creatorID": "",
       "eventDate": "2022-10-19T05:00:00.000Z",
@@ -74,12 +67,26 @@
       "invited": {}
     },
     {
-      "id": "c05d0f19-7cd5-41e6-b887-82eaba0a8362",
+      "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "2022-10-13T05:00:00.000Z",
+      "eventDate": "2022-10-31T05:00:00.000Z",
+      "eventName": "Test7",
       "invited": {
         "id": []
       }
+    },
+    {
+      "id": "0344ae2d-c19e-4ffe-ad07-f76dd58b1b59",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
+      "eventDate": "2022-10-21T05:00:00.000Z",
+      "eventName": "Testing",
+      "invited": {}
+    },
+    {
+      "id": "74c8871c-70fa-46c0-ab9c-94bba9d8cb6d",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
+      "eventName": "",
+      "invited": {}
     }
   ]
 }

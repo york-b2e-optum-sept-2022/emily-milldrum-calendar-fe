@@ -12,6 +12,8 @@ import { EventInputComponent } from './event-input/event-input.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventComponent } from './event/event.component';
 import { DateSearchComponent } from './date-search/date-search.component';
+import { InviteListComponent } from './invite-list/invite-list.component';
+import { InviteComponent } from './invite/invite.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { DateSearchComponent } from './date-search/date-search.component';
     EventInputComponent,
     EventListComponent,
     EventComponent,
-    DateSearchComponent
+    DateSearchComponent,
+    InviteListComponent,
+    InviteComponent
   ],
     imports: [
         BrowserModule,

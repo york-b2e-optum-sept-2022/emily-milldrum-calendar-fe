@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IEvent} from "../interfaces/IEvent";
 import {EventService} from "../event.service";
 import {Subject, takeUntil} from "rxjs";
