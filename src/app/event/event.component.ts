@@ -16,9 +16,11 @@ export class EventComponent implements OnInit {
 
   @Input() event!: IEvent;
 
-  account!: IAccount;
+  account: IAccount | null = null;
   onDestroy = new Subject();
-  inviteList: IInvite | null = null;
+  //TODO Fix
+  inviteList: any;
+  newInviteList!: IInvite;
   temp: IEvent[] = [];
 
   constructor(private eventService: EventService,
@@ -34,6 +36,7 @@ export class EventComponent implements OnInit {
     this.inviteService.$matchingInviteList.pipe(takeUntil(this.onDestroy)).subscribe(list => {
       this.inviteList = list;
     })
+
   }
 
   ngOnInit(): void {
