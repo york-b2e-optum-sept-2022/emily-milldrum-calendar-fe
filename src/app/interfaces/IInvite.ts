@@ -5,5 +5,5 @@ export interface IInvite{
     email: string;
     firstName: string;
     lastName: string;
-    }[]
+    }
 }

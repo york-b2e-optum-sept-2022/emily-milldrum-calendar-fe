@@ -16,9 +16,9 @@ export class EventComponent implements OnInit {
 
   @Input() event!: IEvent;
 
-  account: IAccount | null = null;
+  account!: IAccount;
   onDestroy = new Subject();
-  inviteList!: IInvite;
+  inviteList: IInvite | null = null;
   temp: IEvent[] = [];
 
   constructor(private eventService: EventService,
@@ -34,7 +34,6 @@ export class EventComponent implements OnInit {
     this.inviteService.$matchingInviteList.pipe(takeUntil(this.onDestroy)).subscribe(list => {
       this.inviteList = list;
     })
-
   }
 
   ngOnInit(): void {
@@ -42,6 +41,7 @@ export class EventComponent implements OnInit {
   }
 
   onUpdateClick(event: IEvent){
+
     this.eventService.updateClick(event);
   }
 

@@ -5,6 +5,5 @@ export interface IEvent{
   creatorID: string;
   eventDate: Date;
   eventName: string;
-  invited: {
-    id: IInvite[]};
+  invited: IInvite[];
 }

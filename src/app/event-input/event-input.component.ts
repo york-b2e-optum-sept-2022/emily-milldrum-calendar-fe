@@ -7,6 +7,7 @@ import {EventService} from "../event.service";
 import {IEvent} from "../interfaces/IEvent";
 import {first, Subject, takeUntil} from "rxjs";
 import {IInvite} from "../interfaces/IInvite";
+import {InvitesService} from "../invites.service";
 
 @Component({
   selector: 'app-event-input',
@@ -24,12 +25,9 @@ export class EventInputComponent implements OnInit {
     eventDate: new Date(),
     eventName: "",
     id: "",
-    invited: {id: []
-    }
+    invited: []
 
   }
-  //event!: IEvent;
-
   //from app/list
   @Input() event!: IEvent;
 
@@ -40,15 +38,21 @@ export class EventInputComponent implements OnInit {
   errorMessage: string | null = null;
   dateSelect: string = "";
   dateConvert!: Date;
-  isChecked!: boolean;
 
   inviteStatus: boolean = false;
   inviteString: string = "Invite";
   cancelInviteButton: string = "Cancel Invite";
 
+  //TODO fix type
+  newInviteList: any;
 
-  constructor(private accountService: AccountService,
-              private eventService: EventService) {
+
+
+
+constructor(private accountService: AccountService,
+              private eventService: EventService,
+            private inviteService: InvitesService) {
+
     //get account list and make a copy for invites
     this.accountList = this.accountService.accountList;
     this.accountService.$accountList.pipe(takeUntil(this.onDestroy))
@@ -61,20 +65,20 @@ export class EventInputComponent implements OnInit {
 
       if (selectEvent != null){
         this.eventInc = selectEvent
-        console.log(selectEvent.id)
-        console.log(selectEvent.eventName)
       } else{
         console.log('error event input')
       }
-      console.log('current event in event input')
-      console.log(this.eventInc)
-
     })
 
     //subscribe to editing change
     this.eventService.$isEditing.pipe(takeUntil(this.onDestroy))
       .subscribe(isEditing => {this.isEditing = isEditing})
-  }
+
+  this.inviteService.$invitedList.pipe(takeUntil(this.onDestroy)).subscribe(list => {
+    this.newInviteList = list;
+  })
+
+}
 
   //TODO code clean up
   ngOnInit(): void {
@@ -85,6 +89,7 @@ export class EventInputComponent implements OnInit {
   //   this.accountList = [...this.list];
   // }
 
+  //TODO fix null name error?
   getEventName(){
     if (this.eventInc.eventName == undefined){
       return "";
@@ -139,7 +144,6 @@ export class EventInputComponent implements OnInit {
   }
 
   updateEvent(eventForm: NgForm){
-
     const updateEvent = {
       id: this.eventInc?.id,
       creatorID: this.event.creatorID,
@@ -162,7 +166,6 @@ export class EventInputComponent implements OnInit {
   }
 
   //for date select
-
   select(model: any){
     console.log(model + "test");
   }
@@ -170,8 +173,5 @@ export class EventInputComponent implements OnInit {
   ngOnDestroy() {
     this.onDestroy.next(null);
     this.onDestroy.complete();
-
-
-
   }
 }

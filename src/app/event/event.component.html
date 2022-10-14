@@ -1,11 +1,12 @@
-<h4>Event List</h4>
+<h4>Event Details</h4>
 <table class="table table-striped">
   <thead>
   <tr>
     <th scope="col">Date</th>
     <th scope="col">Event Name</th>
     <th scope="col">Invited</th>
-    <th scope="col"> (Editting tools // NGIF)</th>
+    <th *ngIf="this.account?.id == event.creatorID"
+        scope="col">Edit Event</th>
   </tr>
   </thead>
   <tbody>
@@ -14,9 +15,11 @@
 
 <td class="eventName">{{event.eventName}}</td>
 
-<td><div *ngFor="let person of this.inviteList.invited">
+<td *ngIf="this.inviteList != null">
+  <div *ngFor="let person of this.inviteList.invited">
   {{person.firstName}} {{person.lastName}}
-</div></td>
+  </div>
+</td>
 
 
 <td *ngIf="this.account?.id == event.creatorID"

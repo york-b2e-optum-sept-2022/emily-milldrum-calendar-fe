@@ -58,6 +58,56 @@
       "eventDate": "2022-10-21T05:00:00.000Z",
       "eventName": "Testing",
       "invited": {}
+    },
+    {
+      "id": "5469712d-7a46-4106-98de-7983b32dcd93",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
+      "eventDate": "2022-10-13T05:00:00.000Z",
+      "eventName": "123",
+      "invited": [
+        [
+          {
+            "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+            "email": "test2@test.com",
+            "firstName": "Bob",
+            "lastName": "Builder"
+          },
+          {
+            "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+            "email": "test2@test.com",
+            "firstName": "Bob",
+            "lastName": "Builder"
+          },
+          {
+            "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+            "email": "test3@test.com",
+            "firstName": "Jackie",
+            "lastName": "Chan"
+          },
+          {
+            "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+            "email": "test3@test.com",
+            "firstName": "Jackie",
+            "lastName": "Chan"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "6a3596d4-3363-4b0a-94de-576b09a32a59",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
+      "eventDate": "2022-10-19T05:00:00.000Z",
+      "eventName": "ee",
+      "invited": [
+        [
+          {
+            "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+            "email": "test2@test.com",
+            "firstName": "Bob",
+            "lastName": "Builder"
+          }
+        ]
+      ]
     }
   ],
   "invites": [
@@ -65,11 +115,11 @@
       "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
       "invited": [
         {
-        "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
-        "email": "test2@test.com",
-        "firstName": "Jackie",
-        "lastName": "Chan"
-      },
+          "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+          "email": "test2@test.com",
+          "firstName": "Jackie",
+          "lastName": "Chan"
+        },
         {
           "id": "b6248e76-4964-4ac7-8636-63166ac4ff51",
           "email": "test2@test.com",

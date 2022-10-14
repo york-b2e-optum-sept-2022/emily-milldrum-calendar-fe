@@ -14,6 +14,8 @@ export class InviteListComponent implements OnInit {
   onDestroy = new Subject();
 //  @Input() event!: IEvent;
 
+
+
   constructor(private accountService: AccountService) {
     //get event list
     this.accountService.$accountList.pipe(takeUntil(this.onDestroy)).subscribe(
@@ -21,6 +23,7 @@ export class InviteListComponent implements OnInit {
         this.accountList = accountList;
       }
     );
+
     //TODO Error message
   }
 

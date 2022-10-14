@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {IEvent} from "./interfaces/IEvent";
-import {BehaviorSubject, first} from "rxjs";
+import {BehaviorSubject, first, Subject, takeUntil} from "rxjs";
 import {HttpService} from "./http.service";
 import {AccountService} from "./account.service";
 import {v4 as uuidv4} from "uuid";
 import {IAccount} from "./interfaces/IAccount";
 import {IInvite} from "./interfaces/IInvite";
+import {InvitesService} from "./invites.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,15 @@ export class EventService {
   //variables
   curEventList: IEvent[] =[];
   $eventList = new BehaviorSubject<IEvent[]>([]);
+  currentEvent!: IEvent;
   $selectedEvent = new BehaviorSubject<IEvent | null>(null);
 
+  tempId: string = "";
   private account!: IAccount;
   private accountID: string = "";
+  //TODO
+  newInviteList: any;
+  onDestroy = new Subject();
 
   $isEditing = new BehaviorSubject<boolean>(false);
 
@@ -28,6 +34,7 @@ export class EventService {
   private readonly EVENT_INVALID_EVENT_NAME = "You must provide a valid event name";
   private readonly EVENT_HTTP_ERROR = "There was an error with the HTTP server";
   private readonly EVENT_MISSING_VALUE = "There is a missing value";
+
 
 
   constructor(private httpService: HttpService,
@@ -46,7 +53,7 @@ export class EventService {
     })
 
     //get account from account service
-    this.accountService.$account.subscribe(account => {
+    this.accountService.$account.pipe(takeUntil(this.onDestroy)).subscribe(account => {
       if (account) {
         this.account = account
       }
@@ -96,23 +103,31 @@ export class EventService {
     if (this.account.id != null){
       this.accountID = this.account?.id;
     }
+
+    console.log('creating event -- invite list')
+    console.log(this.newInviteList)
    //TODO Validation
+    this.tempId =  uuidv4();
+
+
     const event: IEvent = {
-          id: uuidv4(),
+          id: this.tempId,
           creatorID: this.accountID,
           eventDate: dateConvert,
           eventName: eventForm.eventName,
-          invited: {
-            id: eventList}
+          invited: this.newInviteList
         }
+
+    console.log(event)
 
     //send event to http/server and listen for ob
     this.httpService.createEvent(event).pipe(first()).subscribe({
       next: (event) => {
         //TODO FIX?
-       //this.$event.next(event);
-        //get updated event list
         this.getEvents();
+       // this.$eventList.next(event);
+        //get updated event list
+
       },
       error: (err) => {
         console.error(err)
@@ -139,8 +154,7 @@ export class EventService {
       creatorID: updateEvent.creatorID,
       eventDate: updateEvent.eventDate,
       eventName: updateEvent.eventName,
-      invited: {
-        id: []}
+      invited: [this.newInviteList]
 
     }
 
@@ -174,6 +188,7 @@ export class EventService {
 
   //click on specific event from list and open details
   openEvent(event: IEvent) {
+    this.currentEvent = event;
     this.$selectedEvent.next(event);
   }
 
@@ -181,4 +196,34 @@ export class EventService {
     this.$selectedEvent.next(null);
   }
 
+  ngOnDestroy() {
+    this.onDestroy.next(null);
+    this.onDestroy.complete();
+  }
+
+  addInvite(account: IAccount, event: IEvent) {
+    console.log('event service add')
+
+    const newInvite: IInvite = {
+      id: this.tempId,
+      invited: {
+        accountID: account.id,
+        email: account.email,
+        firstName: account.firstName,
+        lastName: account.lastName
+      }
+    }
+    this.currentEvent.invited.push()
+
+    //const existingID = event.invited.find(inviteID => inviteID.invited.id === newInvite.id)
+    event.invited.push(newInvite);
+    this.httpService.updateEvent(event).pipe(first()).subscribe({next: (cart) =>
+      {this.$selectedEvent.next(event);
+      },
+      error: (err) => {
+        //TODO
+        console.error(err);
+      }
+    });
+  }
 }
