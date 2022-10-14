@@ -62,12 +62,23 @@ export class InviteComponent implements OnInit {
 
     this.eventService.$isEditing.pipe(takeUntil(this.onDestroy))
       .subscribe(isEditing => {this.isEditing = isEditing})
+    //get add/remove bool
+    this.eventService.$foundOnInvite.pipe(takeUntil(this.onDestroy)).
+    subscribe(foundOnInvite => {this.foundOnInvite=foundOnInvite})
 
+      // const existingAccount = this.newInviteList.find
+      // (account => account.accountID === this.account.id);
+      // if (existingAccount) {
+      //   this.foundOnInvite = true;
+      // } else {
+      //   this.foundOnInvite= false;
+      // }
 
     if (this.isEditing){
       console.log('invite editting')
       console.log(this.curAccID)
       console.log(this.invitedList)
+
 
       //TODO find existing invite
     // const existInvite = this.event.invited.find(
@@ -93,18 +104,14 @@ export class InviteComponent implements OnInit {
   addInvite(account: IAccount){
     console.log(this.eventInc)
     console.log('add works')
-    this.inviteService.addInvite(account, this.eventInc)
+    this.inviteService.addInvite(account)
+    this.eventService.$foundOnInvite.next(true);
   }
 
   removeInvite(account: IAccount){
     console.log('remove works')
-    const newInvite: { } = {
-      accountID: account.id,
-      email: account.email,
-      firstName: account.firstName,
-      lastName: account.lastName
-    }
-    this.inviteService.removeInvite()
+    this.inviteService.removeInvite(account)
+    this.eventService.$foundOnInvite.next(false);
   }
 
 }

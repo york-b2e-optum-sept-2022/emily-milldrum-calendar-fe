@@ -24,6 +24,7 @@ export class InvitesService {
   inviteList:  IInvite | null = null;
 
   isEditing: boolean = false;
+  foundOnInvite: boolean = false;
   onDestroy = new Subject();
 
   constructor(private httpService: HttpService,
@@ -64,7 +65,7 @@ export class InvitesService {
     })
   }
 
-  addInvite(account: IAccount, event: IEvent) {
+  addInvite(account: IAccount) {
 
     console.log('invite s add');
     if (this.newInviteList == null || undefined) {
@@ -94,10 +95,10 @@ export class InvitesService {
     }
   }
 
-  removeInvite(){
+  removeInvite(account: IAccount){
     // if (!this.isEditing){
       console.log('not editing remove');
-      //this.invitedList.push(newInvite)
+      //find + this.invitedList.pop(newInvite)
       console.log(this.invitedList);
     // } else {
       console.log(' editing remove, get http list');

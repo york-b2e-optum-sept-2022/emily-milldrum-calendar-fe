@@ -6,7 +6,6 @@ import {AccountService} from "./account.service";
 import {v4 as uuidv4} from "uuid";
 import {IAccount} from "./interfaces/IAccount";
 import {IInvite, IInvite2} from "./interfaces/IInvite";
-import {InvitesService} from "./invites.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +21,15 @@ export class EventService {
   tempId: string = "";
   private account!: IAccount;
   private accountID: string = "";
-  //TODO
-  newInvite: any;
-  newInviteList!: IInvite2[];
 
+  newInviteList!: IInvite2[];
   onDestroy = new Subject();
 
+  $foundOnInvite = new BehaviorSubject<boolean>(false);
   $isEditing = new BehaviorSubject<boolean>(false);
 
-  $eventError = new BehaviorSubject<string | null>(null);
-
   //error messages
+  $eventError = new BehaviorSubject<string | null>(null);
   private readonly EVENT_INVALID_EVENT_NAME = "You must provide a valid event name";
   private readonly EVENT_HTTP_ERROR = "There was an error with the HTTP server";
   private readonly EVENT_MISSING_VALUE = "There is a missing value";
@@ -96,8 +93,10 @@ export class EventService {
     })
   }
 
+
+
   //create new event
-  createEvent(eventForm: IEvent, dateConvert: Date, eventList: IInvite[]){
+  createEvent(eventForm: IEvent, dateConvert: Date){
     //getInvite
     if (eventForm.eventName.length == 0){
       this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
@@ -129,11 +128,6 @@ export class EventService {
     //send invites to http/server and use obs
     this.httpService.createNewInvite(invite).pipe(first()).subscribe({
       next: (event) => {
-        //TODO FIX?
-        // this.getInvites();
-        // this.$eventList.next(event);
-        //get updated event list
-
       },
       error: (err) => {
         console.error(err)
@@ -143,19 +137,13 @@ export class EventService {
     //send event to http/server and use obs
     this.httpService.createEvent(event).pipe(first()).subscribe({
       next: (event) => {
-        //TODO FIX?
         this.getEvents();
-       // this.$eventList.next(event);
-        //get updated event list
-
       },
       error: (err) => {
         console.error(err)
         this.$eventError.next(this.EVENT_HTTP_ERROR)
       }
     })
-
-
   }
 
   //update from list clicked, change boolean & ensure selected event current
@@ -164,10 +152,7 @@ export class EventService {
     this.$isEditing.next(true);
   }
 
-
   //update selected event
-  //
-  // updateEvent(editEvent: IEvent, dateConvert: Date, eventList: IInvite[]){
     updateEvent(updateEvent: any){
     console.log(updateEvent)
 
@@ -175,17 +160,12 @@ export class EventService {
       id: updateEvent.id,
       creatorID: updateEvent.creatorID,
       eventDate: updateEvent.eventDate,
-      eventName: updateEvent.eventName,
-     // invited: [this.newInviteList]
-
+      eventName: updateEvent.eventName
     }
 
     this.httpService.updateEvent(event).pipe(first()).subscribe({
       next: (event) => {
-        //TODO FIX?
-        //this.$event.next(event);
         this.getEvents();
-        console.log('http updating ' + event);
       },
       error: (err) => {
         console.error(err)
@@ -230,20 +210,5 @@ export class EventService {
   }
 
 
-  addInvite(account: IAccount, event: IEvent) {
-    console.log('event service add')
 
-    //this.httpService.....push(this.newInviteList)
-
-    //const existingID = event.invited.find(inviteID => inviteID.invited.id === newInvite.id)
-    // event.invited.push(newInvite);
-    // this.httpService.updateEvent(event).pipe(first()).subscribe({next: (cart) =>
-    //   {this.$selectedEvent.next(event);
-    //   },
-    //   error: (err) => {
-    //     //TODO
-    //     console.error(err);
-    //   }
-    // });
-  }
 }
