@@ -28,6 +28,8 @@ export class HttpService {
     return this.httpClient.get('http://localhost:3000/accounts')
   }
 
+
+
   getEvents()  {
     return this.httpClient.get('http://localhost:3000/events'
     )as Observable<IEvent[]>;
@@ -53,8 +55,17 @@ export class HttpService {
     )as Observable<IEvent>
   }
 
+
+
   getInvites(id: string) {
     return this.httpClient.get('http://localhost:3000/invites/' + id
     )as Observable<IInvite>;
+  }
+
+  createNewInvite(invite: IInvite){
+    console.log('create event') //TODO
+    return this.httpClient.post(
+      'http://localhost:3000/invites', invite
+    ) as Observable<IEvent>;
   }
 }

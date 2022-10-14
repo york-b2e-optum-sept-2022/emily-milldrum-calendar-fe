@@ -24,8 +24,7 @@ export class EventInputComponent implements OnInit {
     creatorID: "",
     eventDate: new Date(),
     eventName: "",
-    id: "",
-    invited: []
+    id: ""
 
   }
   //from app/list
@@ -38,10 +37,6 @@ export class EventInputComponent implements OnInit {
   errorMessage: string | null = null;
   dateSelect: string = "";
   dateConvert!: Date;
-
-  inviteStatus: boolean = false;
-  inviteString: string = "Invite";
-  cancelInviteButton: string = "Cancel Invite";
 
   //TODO fix type
   newInviteList: any;
@@ -80,22 +75,10 @@ constructor(private accountService: AccountService,
 
 }
 
-  //TODO code clean up
   ngOnInit(): void {
-    //this.accountList = [...this.list];
-  }
-  //
-  // ngOnChanges(changes: SimpleChanges){
-  //   this.accountList = [...this.list];
-  // }
 
-  //TODO fix null name error?
-  getEventName(){
-    if (this.eventInc.eventName == undefined){
-      return "";
-    } else
-    return this.eventInc?.eventName
   }
+
   onDateSelect(date: NgbDate){
     //convert date data to Date format
     this.dateConvert = new Date(date.year, date.month - 1, date.day)

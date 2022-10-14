@@ -28,20 +28,18 @@
       "creatorID": "test2@test2.com",
       "eventDate": "10/10/2022",
       "eventName": "October Event",
-      "invited": [
-        "Lee"
-      ]
+      "invited": {
+        "id": []
+      }
     },
     {
       "id": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d111",
       "creatorID": "test@test.com",
       "eventDate": "12/10/2022",
       "eventName": "December Event",
-      "invited": [
-        "Em",
-        "Lee",
-        "Kevin"
-      ]
+      "invited": {
+        "id": []
+      }
     },
     {
       "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
@@ -55,64 +53,30 @@
     {
       "id": "0344ae2d-c19e-4ffe-ad07-f76dd58b1b59",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "2022-10-21T05:00:00.000Z",
-      "eventName": "Testing",
-      "invited": {}
-    },
-    {
-      "id": "5469712d-7a46-4106-98de-7983b32dcd93",
-      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "2022-10-13T05:00:00.000Z",
-      "eventName": "123",
-      "invited": [
-        [
-          {
-            "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
-            "email": "test2@test.com",
-            "firstName": "Bob",
-            "lastName": "Builder"
-          },
-          {
-            "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
-            "email": "test2@test.com",
-            "firstName": "Bob",
-            "lastName": "Builder"
-          },
-          {
-            "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
-            "email": "test3@test.com",
-            "firstName": "Jackie",
-            "lastName": "Chan"
-          },
-          {
-            "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
-            "email": "test3@test.com",
-            "firstName": "Jackie",
-            "lastName": "Chan"
-          }
-        ]
-      ]
+      "eventName": "October 13th Event"
     },
     {
-      "id": "6a3596d4-3363-4b0a-94de-576b09a32a59",
+      "id": "7d0e1fb2-66bd-4537-9b15-ecb59ceda8e9",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventDate": "2022-10-19T05:00:00.000Z",
-      "eventName": "ee",
-      "invited": [
-        [
-          {
-            "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
-            "email": "test2@test.com",
-            "firstName": "Bob",
-            "lastName": "Builder"
-          }
-        ]
-      ]
+      "eventDate": "2022-10-01T05:00:00.000Z",
+      "eventName": "Everyone!"
     }
   ],
   "invites": [
     {
       "id": "373f7b03-1bc8-4b2e-a473-21788751235e",
+      "invited": [
+        {
+          "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+          "email": "test2@test.com",
+          "firstName": "Jackie",
+          "lastName": "Chan"
+        }
+      ]
+    },
+    {
+      "id": "0344ae2d-c19e-4ffe-ad07-f76dd58b1b59",
       "invited": [
         {
           "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
@@ -126,6 +90,29 @@
           "password": "test",
           "firstName": "Bob",
           "lastName": "Builder"
+        }
+      ]
+    },
+    {
+      "id": "7d0e1fb2-66bd-4537-9b15-ecb59ceda8e9",
+      "invited": [
+        {
+          "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+          "email": "test2@test.com",
+          "firstName": "Bob",
+          "lastName": "Builder"
+        },
+        {
+          "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+          "email": "test2@test.com",
+          "firstName": "Bob",
+          "lastName": "Builder"
+        },
+        {
+          "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+          "email": "test3@test.com",
+          "firstName": "Jackie",
+          "lastName": "Chan"
         }
       ]
     }

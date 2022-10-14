@@ -1,50 +1,39 @@
 <h4>Create Event</h4>
 
 <form #eventForm="ngForm" (ngSubmit)="createEvent(eventForm)">
-  <div class="form-group">
-    <label for="eventNameInput">Event Name</label>
-    <input [(ngModel)]="eventInc.eventName"  name="eventName" class="form-control" id="eventNameInput" placeholder="Enter Event Name">
-  </div>
+    <div class="form-group">
+      <label for="eventNameInput">Event Name</label>
+      <input [(ngModel)]="eventInc.eventName"  name="eventName" class="form-control" id="eventNameInput" placeholder="Enter Event Name">
+    </div>
 
-<!--  [(ngModel)]="event.eventName"-->
+  <!--  [(ngModel)]="event.eventName"-->
 
+    <ngb-datepicker ngModel="{{eventInc.eventDate}}" name="date" id="dateInput"
+                    [(ngModel)]="dateSelect" (ngModelChange)="select(dateSelect)"
+                    [minDate]="{year: 1, month: 1, day: 1}"
+                  [maxDate]="{year: 9999, month: 12, day: 31}"
+              (dateSelect)="onDateSelect($event)">
 
+    </ngb-datepicker>
 
-
-  <ngb-datepicker ngModel="{{eventInc.eventDate}}" name="date" id="dateInput"
-                  [(ngModel)]="dateSelect" (ngModelChange)="select(dateSelect)"
-                  [minDate]="{year: 1, month: 1, day: 1}"
-                [maxDate]="{year: 9999, month: 12, day: 31}"
-            (dateSelect)="onDateSelect($event)"
-></ngb-datepicker>
-
-<!--<div class="row">-->
-<!--<div class="col">-->
-
-<!--    <div *ngFor="let account of accountList">-->
-<!--&lt;!&ndash;      <input name="invites" type="checkbox"  id="{{account}}" [checked]="isChecked" (change)="eventCheck($event, account, isChecked)">&ndash;&gt;-->
-<!--&lt;!&ndash;      <input *ngIf="invite.invited" type="checkbox" checked (change)="eventCheck($event)">&ndash;&gt;-->
-<!--&lt;!&ndash;      value="{{account.value}}" [(ngModel)]="account.checked"&ndash;&gt;-->
-
-<!--      <button class="btn btn-outline-success" *ngIf="!inviteStatus" (click)="invite(account)">{{inviteString}} {{account.firstName}} {{account.lastName}}-->
-<!--      </button>-->
-<!--      <button class="btn btn-outline-success" *ngIf="inviteStatus" (click)="invite(account)">{{cancelInviteButton}} {{account.firstName}} {{account.lastName}}-->
-<!--      </button>-->
-
-<!--    </div>-->
-
-<!--</div>-->
-<!--</div>-->
-  </form>
+</form>
 <br>
 
 <app-invite-list></app-invite-list>
+
     <div *ngIf="!isEditing">
-    <button class="btn btn-outline-success" (click)="createEvent(eventForm)"  type="submit">Create Event</button>
+    <button class="btn btn-outline-success"
+            (click)="createEvent(eventForm)"
+            type="submit">Create Event</button>
     </div>
+
     <div *ngIf="isEditing">
-      <button class="btn btn-outline-success" (click)="updateEvent(eventForm)"  type="submit" >Update Event</button>
-      <button class="btn btn-outline-success" (click)="cancelUpdate()"  type="submit" >Cancel</button>
+      <button class="btn btn-outline-success"
+              (click)="updateEvent(eventForm)"
+              type="submit" >Update Event</button>
+      <button class="btn btn-outline-success"
+              (click)="cancelUpdate()"
+              type="submit" >Cancel</button>
 
     </div>
 

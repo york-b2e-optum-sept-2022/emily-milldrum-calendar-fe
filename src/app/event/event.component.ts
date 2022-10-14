@@ -31,10 +31,13 @@ export class EventComponent implements OnInit {
      this.account = account;
 
    })
-    // @ts-ignore
     this.inviteList = this.temp;
     this.inviteService.$matchingInviteList.pipe(takeUntil(this.onDestroy)).subscribe(list => {
-      this.inviteList = list;
+      if (list != null || undefined) {
+        this.inviteList = list;
+      }else{
+        this.inviteList = {}
+      }
     })
 
   }

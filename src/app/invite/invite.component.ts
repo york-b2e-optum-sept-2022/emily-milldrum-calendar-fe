@@ -17,11 +17,16 @@ export class InviteComponent implements OnInit {
   @Input() account!: IAccount;
   @Input() event!: IEvent;
 
-  onDestroy = new Subject();
-  //account: IAccount | null = null;
+  private onDestroy = new Subject();
+  private accountInc: IAccount | null = null;
+  foundOnInvite: boolean = false;
 
-  invitedList:  IInvite[] = [];
+
+  curAccID: string = "";
+  private invitedList!:  IInvite;
   private eventInc!: IEvent;
+  private isEditing: boolean = false;
+
   constructor(private eventService: EventService,
               private accountService: AccountService,
               private inviteService: InvitesService) {
@@ -30,32 +35,55 @@ export class InviteComponent implements OnInit {
     //   this.account = account
     // })
 
-    //get cur account for disable
-    // this.accountService.$account
-    //   .pipe(takeUntil(this.onDestroy))
-    //   .subscribe(account => {
-    //     this.account = account
-    //   })
+    //get cur account & assign to id if not null
+    this.accountService.$account
+      .pipe(first())
+      .subscribe(account => {
+        this.accountInc = account
+        if (this.accountInc == null){
+            //TODO ERROR
+        } else{
+          this.curAccID = this.accountInc.id;
+        }
+      })
 
+    //get the current invite list
+    this.inviteService.$matchingInviteList
+      .pipe(first())
+      .subscribe(list => {
+
+        if (list == null || undefined){
+          //TODO ERROR
+        } else{
+          this.invitedList = list
+        }
+      })
+    console.log(this.invitedList)
+
+    this.eventService.$isEditing.pipe(takeUntil(this.onDestroy))
+      .subscribe(isEditing => {this.isEditing = isEditing})
+
+
+    if (this.isEditing){
+      console.log('invite editting')
+      console.log(this.curAccID)
+      console.log(this.invitedList)
+
+      //TODO find existing invite
+    // const existInvite = this.event.invited.find(
+    //   person => person.invited.accountID == this.account.id)
+    // {
+    //   if (existInvite) {
+    //     this.foundOnInvite = true;
+    //   } else {
+    //     this.foundOnInvite = false;
+    //   }
+    // }
+    }
   }
 
   ngOnInit(): void {
-    console.log('invite log')
-    console.log(this.account);
   }
-
-  // onUpdateClick(event: IEvent){
-  //   this.eventService.updateClick(event);
-  // }
-  //
-  // onDeleteClick(event: IEvent){
-  //   this.eventService.deleteEvent(event);
-  // }
-  //
-  //
-  // closeEvent(){
-  //   this.eventService.closeEvent();
-  // }
 
   ngOnDestroy(): void {
     this.onDestroy.next(null);

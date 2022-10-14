@@ -5,7 +5,7 @@ import {HttpService} from "./http.service";
 import {AccountService} from "./account.service";
 import {v4 as uuidv4} from "uuid";
 import {IAccount} from "./interfaces/IAccount";
-import {IInvite} from "./interfaces/IInvite";
+import {IInvite, IInvite2} from "./interfaces/IInvite";
 import {InvitesService} from "./invites.service";
 
 @Injectable({
@@ -23,7 +23,9 @@ export class EventService {
   private account!: IAccount;
   private accountID: string = "";
   //TODO
-  newInviteList: any;
+  newInvite: any;
+  newInviteList!: IInvite2[];
+
   onDestroy = new Subject();
 
   $isEditing = new BehaviorSubject<boolean>(false);
@@ -96,6 +98,7 @@ export class EventService {
 
   //create new event
   createEvent(eventForm: IEvent, dateConvert: Date, eventList: IInvite[]){
+    //getInvite
     if (eventForm.eventName.length == 0){
       this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
     }
@@ -104,8 +107,6 @@ export class EventService {
       this.accountID = this.account?.id;
     }
 
-    console.log('creating event -- invite list')
-    console.log(this.newInviteList)
    //TODO Validation
     this.tempId =  uuidv4();
 
@@ -115,12 +116,31 @@ export class EventService {
           creatorID: this.accountID,
           eventDate: dateConvert,
           eventName: eventForm.eventName,
+         // invited: this.newInviteList
+        }
+        const invite: IInvite = {
+          id: this.tempId,
           invited: this.newInviteList
         }
 
     console.log(event)
+    console.log(invite)
 
-    //send event to http/server and listen for ob
+    //send invites to http/server and use obs
+    this.httpService.createNewInvite(invite).pipe(first()).subscribe({
+      next: (event) => {
+        //TODO FIX?
+        // this.getInvites();
+        // this.$eventList.next(event);
+        //get updated event list
+
+      },
+      error: (err) => {
+        console.error(err)
+        this.$eventError.next(this.EVENT_HTTP_ERROR)
+      }
+    })
+    //send event to http/server and use obs
     this.httpService.createEvent(event).pipe(first()).subscribe({
       next: (event) => {
         //TODO FIX?
@@ -134,6 +154,8 @@ export class EventService {
         this.$eventError.next(this.EVENT_HTTP_ERROR)
       }
     })
+
+
   }
 
   //update from list clicked, change boolean & ensure selected event current
@@ -154,7 +176,7 @@ export class EventService {
       creatorID: updateEvent.creatorID,
       eventDate: updateEvent.eventDate,
       eventName: updateEvent.eventName,
-      invited: [this.newInviteList]
+     // invited: [this.newInviteList]
 
     }
 
@@ -201,29 +223,27 @@ export class EventService {
     this.onDestroy.complete();
   }
 
+
+  setInviteList(inviteList: IInvite2[]){
+    this.newInviteList = inviteList;
+    console.log(this.newInviteList)
+  }
+
+
   addInvite(account: IAccount, event: IEvent) {
     console.log('event service add')
 
-    const newInvite: IInvite = {
-      id: this.tempId,
-      invited: {
-        accountID: account.id,
-        email: account.email,
-        firstName: account.firstName,
-        lastName: account.lastName
-      }
-    }
-    this.currentEvent.invited.push()
+    //this.httpService.....push(this.newInviteList)
 
     //const existingID = event.invited.find(inviteID => inviteID.invited.id === newInvite.id)
-    event.invited.push(newInvite);
-    this.httpService.updateEvent(event).pipe(first()).subscribe({next: (cart) =>
-      {this.$selectedEvent.next(event);
-      },
-      error: (err) => {
-        //TODO
-        console.error(err);
-      }
-    });
+    // event.invited.push(newInvite);
+    // this.httpService.updateEvent(event).pipe(first()).subscribe({next: (cart) =>
+    //   {this.$selectedEvent.next(event);
+    //   },
+    //   error: (err) => {
+    //     //TODO
+    //     console.error(err);
+    //   }
+    // });
   }
 }
