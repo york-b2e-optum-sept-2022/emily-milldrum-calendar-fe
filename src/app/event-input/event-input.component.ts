@@ -73,6 +73,9 @@ constructor(private accountService: AccountService,
     this.newInviteList = list;
   })
 
+  this.eventService.$eventError.pipe(takeUntil(this.onDestroy)).subscribe
+  (message => this.errorMessage = message)
+
 }
 
   ngOnInit(): void {
@@ -86,9 +89,9 @@ constructor(private accountService: AccountService,
 
 
   createEvent(eventForm: NgForm){
-    this.eventService.createEvent(
-      eventForm.value as IEvent,
-      this.dateConvert)
+      this.eventService.createEvent(
+        eventForm.value as IEvent,
+        this.dateConvert)
   }
 
   updateEvent(eventForm: NgForm){

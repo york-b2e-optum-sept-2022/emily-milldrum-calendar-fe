@@ -4,7 +4,6 @@ import {first, Subject, takeUntil} from "rxjs";
 import {HttpService} from "./http.service";
 import {EventService} from "./event.service";
 import {IAccount} from "./interfaces/IAccount";
-import {IEvent} from "./interfaces/IEvent";
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +66,8 @@ export class InvitesService {
 
   addInvite(account: IAccount) {
 
-    console.log('invite s add');
+      console.log('invite s add');
+      //create invite list if no list exists
     if (this.newInviteList == null || undefined) {
       console.log('invite list doesnt exist, creating new');
       this.newInviteList = [{
@@ -80,27 +80,40 @@ export class InvitesService {
 
       this.eventService.setInviteList(this.newInviteList)
     } else {
+
+      //if list exists, check for existing id in list
+      const idFound = this.newInviteList.find(id => id.accountID === account.id);
       //modify existing list
       console.log('invite list exists, modify exist')
 
-      const newInvite: IInvite2 = {
+      //if found
+      if (idFound){
+
+        console.log('account id found in list')
+
+        //if not found
+      } else {
+
+        const newInvite: IInvite2 = {
           accountID: account.id,
           email: account.email,
           firstName: account.firstName,
           lastName: account.lastName
+        }
+        this.newInviteList.push(newInvite);
+        this.eventService.setInviteList(this.newInviteList)
+        console.log(this.newInviteList)
       }
-      this.newInviteList.push(newInvite);
-      this.eventService.setInviteList(this.newInviteList)
-      console.log(this.newInviteList)
     }
   }
 
   removeInvite(account: IAccount){
-    // if (!this.isEditing){
-      console.log('not editing remove');
-      //find + this.invitedList.pop(newInvite)
-      console.log(this.invitedList);
-    // } else {
+
+    //if list exists...
+
+    //find item
+      const idFound = this.newInviteList.findIndex(id => id.accountID === account.id);
+      this.newInviteList.splice(idFound, 1)
       console.log(' editing remove, get http list');
     // }
 

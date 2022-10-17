@@ -31,6 +31,7 @@ export class EventService {
   //error messages
   $eventError = new BehaviorSubject<string | null>(null);
   private readonly EVENT_INVALID_EVENT_NAME = "You must provide a valid event name";
+  private readonly EVENT_INVALID_EVENT_DATE = "You must provide a valid event date";
   private readonly EVENT_HTTP_ERROR = "There was an error with the HTTP server";
   private readonly EVENT_MISSING_VALUE = "There is a missing value";
 
@@ -98,8 +99,14 @@ export class EventService {
   //create new event
   createEvent(eventForm: IEvent, dateConvert: Date){
     //getInvite
-    if (eventForm.eventName.length == 0){
+    if (eventForm.eventName.length == 0 || ""){
       this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
+      return;
+    }
+
+    if (dateConvert == null || undefined){
+      this.$eventError.next(this.EVENT_INVALID_EVENT_DATE)
+      return;
     }
 
     if (this.account.id != null){

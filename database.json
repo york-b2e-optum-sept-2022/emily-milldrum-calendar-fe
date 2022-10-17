@@ -63,15 +63,16 @@
       "eventName": "Everyone!"
     },
     {
-      "id": "b156a494-cc49-401e-a203-2ba5ec9d0227",
-      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
-      "eventName": ""
-    },
-    {
       "id": "c77961c4-d30d-4139-812a-e6aee7a8fd2b",
       "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
       "eventDate": "2022-10-13T05:00:00.000Z",
       "eventName": "EVeryone2"
+    },
+    {
+      "id": "c80b8b5e-bcaa-4c71-90cd-122e9ce0ead8",
+      "creatorID": "ca4f1cd6-bfa1-48c0-a511-bf24ef23114d",
+      "eventDate": "2022-10-27T05:00:00.000Z",
+      "eventName": "New Event Test"
     }
   ],
   "invites": [
@@ -152,6 +153,69 @@
           "email": "test3@test.com",
           "firstName": "Jackie",
           "lastName": "Chan"
+        }
+      ]
+    },
+    {
+      "id": "c80b8b5e-bcaa-4c71-90cd-122e9ce0ead8",
+      "invited": [
+        {
+          "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+          "email": "test2@test.com",
+          "firstName": "Bob",
+          "lastName": "Builder"
+        },
+        {
+          "accountID": "ee8319de-ff6e-4f77-abd8-45464c64ac15",
+          "email": "test3@test.com",
+          "firstName": "Jackie",
+          "lastName": "Chan"
+        }
+      ]
+    },
+    {
+      "id": "b0afaba2-bfd1-40fc-9ec8-f7244fadd10c",
+      "invited": [
+        {
+          "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+          "email": "test2@test.com",
+          "firstName": "Bob",
+          "lastName": "Builder"
+        }
+      ]
+    },
+    {
+      "id": "8f2c88d1-a92c-4f21-9195-6eb131231143"
+    },
+    {
+      "id": "804f7c30-d855-4342-9d22-ab51589e5e58"
+    },
+    {
+      "id": "00037ada-8e7f-484d-8440-eacabd75e4a9"
+    },
+    {
+      "id": "13c83a99-d22a-4bbc-9d6d-bf53ef0fd638"
+    },
+    {
+      "id": "5cb571fe-54ba-46dc-8732-621bc1dc56b0"
+    },
+    {
+      "id": "d01ced41-30f4-48b7-98f4-fc9cb1d11ae0"
+    },
+    {
+      "id": "ac73f95b-1207-43b3-bdc8-08aba5cd460c"
+    },
+    {
+      "id": "d94cd1e9-09b0-41e6-83c7-1ebceddd8987"
+    },
+    {
+      "id": "bfc08fbf-e7ea-4b12-9768-3b328a96647f",
+      "invited": [
+        {
+          "accountID": "b6248e76-4964-4ac7-8636-63166ac4ff51",
+          "email": "test2@test.com",
+          "firstName": "Bob",
+          "lastName": "Builder"
         }
       ]
     }

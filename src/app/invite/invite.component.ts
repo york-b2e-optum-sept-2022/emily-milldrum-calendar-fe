@@ -105,13 +105,14 @@ export class InviteComponent implements OnInit {
     console.log(this.eventInc)
     console.log('add works')
     this.inviteService.addInvite(account)
-    this.eventService.$foundOnInvite.next(true);
+    this.foundOnInvite = true;
   }
 
   removeInvite(account: IAccount){
     console.log('remove works')
     this.inviteService.removeInvite(account)
-    this.eventService.$foundOnInvite.next(false);
+    this.foundOnInvite = false;
+    //this.eventService.$foundOnInvite.next(false);
   }
 
 }
