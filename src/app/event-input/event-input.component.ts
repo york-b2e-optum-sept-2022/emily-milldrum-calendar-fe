@@ -60,8 +60,6 @@ constructor(private accountService: AccountService,
 
       if (selectEvent != null){
         this.eventInc = selectEvent
-      } else{
-        console.log('error event input')
       }
     })
 
@@ -92,24 +90,15 @@ constructor(private accountService: AccountService,
       this.eventService.createEvent(
         eventForm.value as IEvent,
         this.dateConvert)
+
+    this.inviteService.$invitedList.next(null);
   }
 
   updateEvent(eventForm: NgForm){
-    const updateEvent = {
-      id: this.eventInc?.id,
-      creatorID: this.event.creatorID,
-      eventDate: this.dateConvert,
-      eventName: this.eventInc.eventName,
-      invited: {
-        id: []}
-    }
-    this.eventService.updateEvent(updateEvent);
+
+    this.eventService.updateEvent(eventForm.value as IEvent, this.dateConvert, this.eventInc?.id);
     this.eventService.$isEditing.next(false)
     this.eventService.$selectedEvent.next(null)
-    // this.eventService.updateEvent(
-    //   eventForm.value as IEvent,
-    //   this.dateConvert,
-    //   this.invitedList);
   }
 
   cancelUpdate(){
@@ -118,7 +107,7 @@ constructor(private accountService: AccountService,
 
   //for date select
   select(model: any){
-    console.log(model + "test");
+    console.log(model)
   }
 
   ngOnDestroy() {

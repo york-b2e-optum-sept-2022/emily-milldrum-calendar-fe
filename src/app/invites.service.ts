@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {IInvite, IInvite2} from "./interfaces/IInvite";
-import {first, Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, first, Subject, takeUntil} from "rxjs";
 import {HttpService} from "./http.service";
 import {EventService} from "./event.service";
 import {IAccount} from "./interfaces/IAccount";
@@ -17,14 +17,19 @@ export class InvitesService {
   //inviteList: any;
   newInviteList!: IInvite2[];
 
+
   //creating a list
   $invitedList = new Subject<any>();
   //get invite
   inviteList:  IInvite | null = null;
 
-  isEditing: boolean = false;
-  foundOnInvite: boolean = false;
   onDestroy = new Subject();
+
+  //error messages
+  $inviteError = new BehaviorSubject<string | null>(null);
+  private readonly INVITE_HTTP_ERROR = "There was an error with the HTTP server";
+
+
 
   constructor(private httpService: HttpService,
               private eventService: EventService)
@@ -40,43 +45,41 @@ export class InvitesService {
         if(incList){
         this.inviteList = incList;
         this.$matchingInviteList.next(this.inviteList)
+
+          // const getInvites = Object.values(inc).map(y => y.valueOf());
+          // for (let i = 0; i < getInvites.length; i++){
+          //   this.inviteList.push(getInvites[i]);
+          // }
         }else {
           console.log('no invite list found')
         }
 
       },
       error: (err) => {
-       //TODO this.$inviteError.next(this.EVENT_HTTP_ERROR);
-        console.log(err)
+       this.$inviteError.next(this.INVITE_HTTP_ERROR);
+       console.log(err)
       }
     })
+
     //this.inviteList = this.temp;
     this.$matchingInviteList.pipe(takeUntil(this.onDestroy)).subscribe(list => {
       if (list != null || undefined) {
         this.inviteList = null;
-        console.log('invite list is not found')
       } else{
         this.inviteList = list;
-        console.log('invite list found')
-
-        console.log(list)
       }
     })
   }
 
   addInvite(account: IAccount) {
-
-      console.log('invite s add');
       //create invite list if no list exists
     if (this.newInviteList == null || undefined) {
-      console.log('invite list doesnt exist, creating new');
       this.newInviteList = [{
           accountID: account.id,
           email: account.email,
           firstName: account.firstName,
           lastName: account.lastName
       }]
-      console.log(this.newInviteList)
 
       this.eventService.setInviteList(this.newInviteList)
     } else {
@@ -84,8 +87,6 @@ export class InvitesService {
       //if list exists, check for existing id in list
       const idFound = this.newInviteList.find(id => id.accountID === account.id);
       //modify existing list
-      console.log('invite list exists, modify exist')
-
       //if found
       if (idFound){
 
@@ -108,15 +109,10 @@ export class InvitesService {
   }
 
   removeInvite(account: IAccount){
-
-    //if list exists...
-
     //find item
       const idFound = this.newInviteList.findIndex(id => id.accountID === account.id);
       this.newInviteList.splice(idFound, 1)
-      console.log(' editing remove, get http list');
-    // }
-
+      this.eventService.setInviteList(this.newInviteList)
   }
 
   ngOnDestroy() {

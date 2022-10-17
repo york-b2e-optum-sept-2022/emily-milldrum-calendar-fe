@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginClick() {
-    console.log("sending " + this.username + " " + this.password);
-    this.accountService.login(this.username, this.password);
+     this.accountService.login(this.username, this.password);
   }
 
   registerClick(){

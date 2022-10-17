@@ -36,7 +36,6 @@ export class EventService {
   private readonly EVENT_MISSING_VALUE = "There is a missing value";
 
 
-
   constructor(private httpService: HttpService,
               private accountService: AccountService) {
 
@@ -68,7 +67,6 @@ export class EventService {
     else{
       this.httpService.deleteEvent(event.id).pipe(first()).subscribe({
         next: (data) => {
-          console.log(data);
           this.getEvents();
           this.$selectedEvent.next(null);
         },
@@ -95,7 +93,6 @@ export class EventService {
   }
 
 
-
   //create new event
   createEvent(eventForm: IEvent, dateConvert: Date){
     //getInvite
@@ -112,8 +109,6 @@ export class EventService {
     if (this.account.id != null){
       this.accountID = this.account?.id;
     }
-
-   //TODO Validation
     this.tempId =  uuidv4();
 
 
@@ -121,16 +116,12 @@ export class EventService {
           id: this.tempId,
           creatorID: this.accountID,
           eventDate: dateConvert,
-          eventName: eventForm.eventName,
-         // invited: this.newInviteList
+          eventName: eventForm.eventName
         }
         const invite: IInvite = {
           id: this.tempId,
           invited: this.newInviteList
         }
-
-    console.log(event)
-    console.log(invite)
 
     //send invites to http/server and use obs
     this.httpService.createNewInvite(invite).pipe(first()).subscribe({
@@ -151,6 +142,7 @@ export class EventService {
         this.$eventError.next(this.EVENT_HTTP_ERROR)
       }
     })
+
   }
 
   //update from list clicked, change boolean & ensure selected event current
@@ -159,16 +151,44 @@ export class EventService {
     this.$isEditing.next(true);
   }
 
-  //update selected event
-    updateEvent(updateEvent: any){
-    console.log(updateEvent)
 
-    const event: IEvent  = {
-      id: updateEvent.id,
-      creatorID: updateEvent.creatorID,
-      eventDate: updateEvent.eventDate,
-      eventName: updateEvent.eventName
-    }
+  //update selected event
+    updateEvent(eventForm: IEvent, dateConvert: Date, eventID: string){
+
+      if (eventForm.eventName.length == 0 || ""){
+        this.$eventError.next(this.EVENT_INVALID_EVENT_NAME)
+        return;
+      }
+
+      if (dateConvert == null || undefined){
+        this.$eventError.next(this.EVENT_INVALID_EVENT_DATE)
+        return;
+      }
+
+      if (this.account.id != null){
+        this.accountID = this.account?.id;
+      }
+
+      const event: IEvent = {
+        id: eventID,
+        creatorID: this.accountID,
+        eventDate: dateConvert,
+        eventName: eventForm.eventName
+      }
+      const invite: IInvite = {
+        id: eventID,
+        invited: this.newInviteList
+      }
+
+      //send invites to http/server and use obs
+      this.httpService.updateInvite(invite).pipe(first()).subscribe({
+        next: (event) => {
+        },
+        error: (err) => {
+          console.error(err)
+          this.$eventError.next(this.EVENT_HTTP_ERROR)
+        }
+      })
 
     this.httpService.updateEvent(event).pipe(first()).subscribe({
       next: (event) => {
@@ -185,7 +205,6 @@ export class EventService {
 
   //search dates
   dateSearch(convertFromDate: Date, convertToDate: Date){
-        console.log('e s datesearch' + convertFromDate + " " + convertToDate)
         this.$eventList.next(
           this.curEventList.filter(
             m => new Date(m.eventDate)

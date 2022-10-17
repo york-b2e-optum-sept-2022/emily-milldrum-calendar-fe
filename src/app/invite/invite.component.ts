@@ -24,7 +24,6 @@ export class InviteComponent implements OnInit {
 
   curAccID: string = "";
   private invitedList!:  IInvite;
-  private eventInc!: IEvent;
   private isEditing: boolean = false;
 
   constructor(private eventService: EventService,
@@ -48,7 +47,7 @@ export class InviteComponent implements OnInit {
       })
 
     //get the current invite list
-    this.inviteService.$matchingInviteList
+    this.inviteService.$invitedList
       .pipe(first())
       .subscribe(list => {
 
@@ -58,7 +57,6 @@ export class InviteComponent implements OnInit {
           this.invitedList = list
         }
       })
-    console.log(this.invitedList)
 
     this.eventService.$isEditing.pipe(takeUntil(this.onDestroy))
       .subscribe(isEditing => {this.isEditing = isEditing})
@@ -102,14 +100,11 @@ export class InviteComponent implements OnInit {
   }
 
   addInvite(account: IAccount){
-    console.log(this.eventInc)
-    console.log('add works')
     this.inviteService.addInvite(account)
     this.foundOnInvite = true;
   }
 
   removeInvite(account: IAccount){
-    console.log('remove works')
     this.inviteService.removeInvite(account)
     this.foundOnInvite = false;
     //this.eventService.$foundOnInvite.next(false);
